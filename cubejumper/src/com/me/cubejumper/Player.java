@@ -109,20 +109,10 @@ public class Player implements InputProcessor
 		}
 	}
 	
-	public BodyDef getBodyDef() {
-		return playerDef;
-	}
-	
-	public FixtureDef getFixtureDef() {
-		return fixDef;
-	}
-
-	public float getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(float speed) {
-		this.speed = speed;
+	public void jump() {
+		float impulse = body.getMass() * 65;
+		body.applyLinearImpulse(new Vector2(0, impulse), body.getWorldCenter(), true);
+		body.applyAngularImpulse(-6500, true);
 	}
 
 	@Override
@@ -134,9 +124,7 @@ public class Player implements InputProcessor
 				world.setContactListener(null);
 				canJump = true;
 			}else if(canJump) {
-				float impulse = body.getMass() * 65;
-				body.applyLinearImpulse(new Vector2(0, impulse), body.getWorldCenter(), true);
-				body.applyAngularImpulse(-6500, true);
+				jump();
 			}
 			break;
 		case Keys.A:
@@ -186,9 +174,7 @@ public class Player implements InputProcessor
 	public boolean touchDown(int screenX, int screenY, int pointer,
 			int button) {
 		if(canJump) {
-			float impulse = body.getMass() * 65;
-			body.applyLinearImpulse(new Vector2(0, impulse), body.getWorldCenter(), true);
-			body.applyAngularImpulse(-6500, true);
+			jump();
 		}
 		return true;
 	}
