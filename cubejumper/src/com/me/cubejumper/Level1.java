@@ -22,7 +22,9 @@ public class Level1 extends LevelBase
 		
 		handler = new RayHandler(world);
 		
-		new ConeLight(handler, 200, Color.BLUE, 1000, 20, 20, 30, 90);
+		ConeLight light = new ConeLight(handler, 200, Color.BLUE, 1000, 20, 20, 30, 90);
+		light.setSoft(true);
+		light.setSoftnessLength(100f);
 		
 		genSpikes(4, 100, 1.5f, 0);
 		genSpikes(7, 140, 1.5f, 4);
