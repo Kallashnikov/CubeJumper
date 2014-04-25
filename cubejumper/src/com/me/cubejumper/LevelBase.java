@@ -29,7 +29,7 @@ public class LevelBase implements Screen
 	
 	public World world;
 	private Box2DDebugRenderer debugRenderer;
-	private OrthographicCamera camera;
+	protected OrthographicCamera camera;
 	
 	private Body groundBody;
 	private BodyDef groundBodyDef;
