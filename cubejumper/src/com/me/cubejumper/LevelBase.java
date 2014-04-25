@@ -33,7 +33,6 @@ public class LevelBase implements Screen
 	
 	private Body groundBody;
 	private BodyDef groundBodyDef;
-	private FixtureDef fixDef;
 	private PolygonShape groundBox;
 	
 	@Override

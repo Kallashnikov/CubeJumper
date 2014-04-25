@@ -20,12 +20,12 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Player implements InputProcessor
 {
 //	private boolean canJump = false;
-	int width = Gdx.graphics.getWidth() / 5;
-	int height = Gdx.graphics.getHeight() / 5;
-	Vector2 movement = new Vector2(0, 0);
+	private int width = Gdx.graphics.getWidth() / 5;
+	private int height = Gdx.graphics.getHeight() / 5;
+	private Vector2 movement = new Vector2(0, 0);
 	private float speed = 50;
 	public static boolean canJump = true;
-	int jumpSteps = 0;
+	public static int xLimit = 60, yLimit = 55;
 	
 	public boolean available = Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer);
 	public float currX, currY, currZ;
@@ -92,8 +92,21 @@ public class Player implements InputProcessor
 		
 		//limits the acceleration of the body
 		//to prevent it from traveling infinitely faster
-		if(body.getLinearVelocity().x > 60)
-			body.setLinearVelocity(60, body.getLinearVelocity().y);
+		if(body.getLinearVelocity().x > xLimit) {
+			if(body.getLinearVelocity().y > yLimit) {
+				body.setLinearVelocity(xLimit, yLimit);
+			}else{
+				body.setLinearVelocity(xLimit, body.getLinearVelocity().y);
+			}
+		}else if(body.getLinearVelocity().y > yLimit) {
+			if(body.getLinearVelocity().x > xLimit) {
+				body.setLinearVelocity(xLimit, yLimit);
+			}else{
+				body.setLinearVelocity(body.getLinearVelocity().x, yLimit);
+			}
+		}else{
+			body.setLinearVelocity(body.getLinearVelocity());
+		}
 	}
 	
 	public BodyDef getBodyDef() {

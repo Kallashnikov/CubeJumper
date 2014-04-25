@@ -1,0 +1,21 @@
+
+bluebutton9.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bluebutton
+  rotate: false
+  xy: 1, 1
+  size: 300, 75
+  split: 58, 8, 37, 8
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+bluebutton_highlighted
+  rotate: false
+  xy: 303, 1
+  size: 300, 75
+  split: 58, 9, 38, 9
+  orig: 300, 75
+  offset: 0, 0
+  index: -1

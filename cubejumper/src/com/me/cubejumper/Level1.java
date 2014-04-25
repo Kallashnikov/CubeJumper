@@ -13,13 +13,14 @@ public class Level1 extends LevelBase
 	public void show() {
 		super.show();
 		
-		genSpikes(4, 100, 0);
-		genSpikes(7, 130, 4);
+		genSpikes(4, 100, 1.5f, 0);
+		genSpikes(7, 140, 1.5f, 4);
+		genSpikes(9, 160, 2.5f, 7);
 	}
 	
-	public void genSpikes(int times, int offset, int pos){
+	public void genSpikes(int times, int offset, float y, int pos){
 		for(int x = 0 + pos; x < times; x++){
-			spikeArray[x] = new Spikes(world, (x * TEN) + offset, 1.5f);
+			spikeArray[x] = new Spikes(world, (x * TEN) + offset, y);
 		}
 	}
 	
