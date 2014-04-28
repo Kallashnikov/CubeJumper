@@ -5,10 +5,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -17,9 +13,27 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
 
+/**
+ * Controls movement, updating, rotation, and the player body.
+ * 
+ * @param Vector2 movement<p>
+ * @param speed (float)
+ * @param canJump (boolean) - can the player jump
+ * @param xLimit (int) - limits x velocity
+ * @param yLimit (int) - limits y velocity
+ * @param available (boolean) - checks if there is an Accelerometer
+ * @param currX (float)
+ * @param currY	(float)
+ * @param currZ	(float)
+ * @param posX (float)
+ * @param posY (float)
+ * @param posZ (float)
+ * @param isDevMode (boolean)
+ * 
+ * @author Jacob
+ */
 public class Player implements InputProcessor
 {
-//	private boolean canJump = false;
 	private int width = Gdx.graphics.getWidth() / 5;
 	private int height = Gdx.graphics.getHeight() / 5;
 	private Vector2 movement = new Vector2(0, 0);
@@ -32,13 +46,13 @@ public class Player implements InputProcessor
 	public float posX, posY, posZ;
 	private boolean isDevMode = false;
 	
-	PlayScreen play;
+	private PlayScreen play;
 	
-	World world;
+	private World world;
 	
-	BodyDef playerDef;
-	FixtureDef fixDef;
-	Body body;
+	private BodyDef playerDef;
+	private FixtureDef fixDef;
+	private Body body;
 	
 	public Player(World world) {
 		this.world = world;

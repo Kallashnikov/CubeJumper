@@ -2,6 +2,13 @@ package com.me.cubejumper;
 
 import com.badlogic.gdx.Game;
 
+/**
+ * Main game class, creates the MainMenu and starts the game.<p>
+ * 
+ * @param TITLE - "Cube Jumper" <p>
+ * 
+ * @author Jacob
+ */
 public class CubeJumper extends Game
 {
 	CubeJumper game;

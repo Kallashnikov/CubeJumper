@@ -12,6 +12,19 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+/** 
+ * Basis for all level classes, it contains:<p>
+ * 
+ *	@param Player player
+ *	@param ContactHandler conHandler
+ *	@param World world
+ *	@param OrthographicCamera camera<p>
+ *	@param startTime - beginning of the highscore count
+ *	@param endTime - end of the highscore count
+ *	@param highScore - takes endTime - startTime<p>
+ *
+ *	@author Jacob
+ */
 public class LevelBase implements Screen
 {
 	private static final float TIMESTEP = 1 / 60f;

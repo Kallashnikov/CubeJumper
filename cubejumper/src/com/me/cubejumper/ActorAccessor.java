@@ -4,6 +4,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import aurelienribon.tweenengine.TweenAccessor;
 
+/**
+ * Use to tween certain values such as, RGB, ALPHA, X, Y.<p>
+ * 
+ * @param RGB
+ * @param ALPHA
+ * @param X
+ * @param Y <p>
+ * 
+ * @author Jacob
+ */
 public class ActorAccessor implements TweenAccessor<Actor> 
 {
 	public static final int RGB = 0, ALPHA = 1, X = 2, Y = 3;

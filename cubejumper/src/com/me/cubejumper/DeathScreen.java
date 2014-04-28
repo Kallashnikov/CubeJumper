@@ -20,25 +20,29 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
-/** Manages the death of the player */
-
+/** 
+ * On the player's death(i.e. makes contact with a spike), this screen
+ * is created and displayed.<p>
+ *
+ *	@author Jacob
+ */
 public class DeathScreen implements Screen 
 {
-	int width = Gdx.graphics.getWidth() / 5;
-	int height = Gdx.graphics.getHeight() / 5;
+	private int width = Gdx.graphics.getWidth() / 5;
+	private int height = Gdx.graphics.getHeight() / 5;
 	
-	CubeJumper game;
-	PlayScreen play;
+	private CubeJumper game;
+	private PlayScreen play;
 	
-	Stage stage;
-	TextureAtlas atlas;
-	Skin skin;
-	Table table;
-	TextButton buttonRestart;
-	BitmapFont white, black;
-	Label heading, time;
-	SpriteBatch batch;
-	TweenManager tween;
+	private Stage stage;
+	private TextureAtlas atlas;
+	private Skin skin;
+	private Table table;
+	private TextButton buttonRestart;
+	private BitmapFont white, black;
+	private Label heading, time;
+	private SpriteBatch batch;
+	private TweenManager tween;
 	
 	public DeathScreen(CubeJumper game) {
 		this.game = game;

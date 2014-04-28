@@ -1,17 +1,20 @@
 package com.me.cubejumper;
 
-import java.text.DecimalFormat;
-
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
+/**
+ * Handles all contacts in the world.
+ * 
+ * @author Jacob
+ */
 public class ContactHandler implements ContactListener
 {
-	CubeJumper game;
-	PlayScreen play;
+	private CubeJumper game;
+	private PlayScreen play;
 	
 	public ContactHandler(CubeJumper game) {
 		this.game = game;
@@ -25,16 +28,12 @@ public class ContactHandler implements ContactListener
 		
 		if((returnData(a, 1) && returnData(b, 2))
 				|| (returnData(a, 2) && returnData(b, 1))){
-			System.out.println("The box has collided with the spike");
-			DecimalFormat df = new DecimalFormat("$.$$");
 			PlayScreen.endTime = System.nanoTime();
 			PlayScreen.highScore = PlayScreen.endTime - PlayScreen.startTime;
 			PlayScreen.highScore /= 1000000000;
-			df.format(PlayScreen.highScore);
 			game.setScreen(new DeathScreen(game));
 		}else if((returnData(a, 1) && returnData(b, 3))
 				|| (returnData(a, 3) && returnData(b, 1))){
-			System.out.println("");
 		}else if((returnData(a, 1) && returnData(b, 0))
 				|| (returnData(a, 0) && returnData(b, 1))){
 			Player.canJump = true;

@@ -1,18 +1,12 @@
 package com.me.cubejumper;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -28,22 +22,27 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
+/**
+ * Creates a menu, with the title, and 2 buttons for starting the game and exiting.
+ * 
+ * @author Jacob
+ */
 public class MainMenu implements Screen
 {
-	CubeJumper game;
+	private CubeJumper game;
 	
-	Stage stage;
-	TextureAtlas atlas;
-	Skin skin;
-	Table table;
-	TextButton buttonPlay, buttonExit;
-	BitmapFont white, black;
-	Label heading;
-	SpriteBatch batch;
-	TweenManager tween;
+	private Stage stage;
+	private TextureAtlas atlas;
+	private Skin skin;
+	private Table table;
+	private TextButton buttonPlay, buttonExit;
+	private BitmapFont white, black;
+	private Label heading;
+	private SpriteBatch batch;
+	private TweenManager tween;
 	
-	int width = Gdx.graphics.getWidth();
-	int height = Gdx.graphics.getHeight();
+	private int width = Gdx.graphics.getWidth();
+	private int height = Gdx.graphics.getHeight();
 	
 	public MainMenu(CubeJumper game) {
 		this.game = game;
