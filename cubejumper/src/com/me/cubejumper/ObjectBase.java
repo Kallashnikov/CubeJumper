@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * World object base class.
@@ -17,6 +18,8 @@ public class ObjectBase
 	protected int height = Gdx.graphics.getWidth() / 5;
 	
 	protected PlayScreen play;
+	
+	protected World world;
 	
 	protected Body body;
 	protected BodyDef bodyDef;

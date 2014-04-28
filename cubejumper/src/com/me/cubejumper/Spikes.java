@@ -20,6 +20,8 @@ public class Spikes extends ObjectBase
 	 * @param world
 	 * @param x - world x position
 	 * @param y - world y position
+	 * 
+	 * @author Jacob
 	 */
 	public Spikes(World world, float x, float y) {
 		//Body definition
@@ -48,6 +50,8 @@ public class Spikes extends ObjectBase
 	 * @param dens - density
 	 * @param frict - friction
 	 * @param rest - restitution
+	 * 
+	 * @author Jacob
 	 */
 	public Spikes(World world, float x, float y, float dens, float frict, float rest) {
 		//Body definition

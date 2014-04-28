@@ -22,7 +22,7 @@ public class ContactHandler implements ContactListener
 	
 	@Override
 	public void beginContact(Contact contact) {
-		//0 = ground, 1 = player, 2 = spikes, 3 = dynamic spikes
+		//0 = ground, 1 = player, 2 = spikes, 3 = dynamic spikes, 4 = cubes
 		Fixture a = contact.getFixtureA();
 		Fixture b = contact.getFixtureB();
 		
@@ -36,6 +36,9 @@ public class ContactHandler implements ContactListener
 				|| (returnData(a, 3) && returnData(b, 1))){
 		}else if((returnData(a, 1) && returnData(b, 0))
 				|| (returnData(a, 0) && returnData(b, 1))){
+			Player.canJump = true;
+		}else if((returnData(a, 1) && returnData(b, 4))
+				|| (returnData(a, 4) && returnData(b, 1))){
 			Player.canJump = true;
 		}
 	}

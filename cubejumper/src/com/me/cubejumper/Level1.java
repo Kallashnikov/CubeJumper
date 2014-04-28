@@ -12,6 +12,7 @@ public class Level1 extends LevelBase
 	private static final int TEN = 10;
 	
 	private Spikes[] spikeArray = new Spikes[100];
+	private Cubes[] cubeArray = new Cubes[100];
 	
 	private RayHandler handler;
 	
@@ -28,6 +29,8 @@ public class Level1 extends LevelBase
 //		light.setSoft(true);
 //		light.setSoftnessLength(100f);
 		
+		genCubes(2, 50, 1.5f, 0);
+		genCubes(3, 50, 11.5f, 2);
 		genSpikes(4, 100, 1.5f, 0);
 		genSpikes(7, 140, 1.5f, 4);
 		genSpikes(9, 160, 11.5f, 7);
@@ -44,6 +47,20 @@ public class Level1 extends LevelBase
 	public void genSpikes(int times, int offset, float y, int pos){
 		for(int x = 0 + pos; x < times; x++){
 			spikeArray[x] = new Spikes(world, (x * TEN) + offset, y);
+		}
+	}
+	
+	/**
+	 * @param times - number of times the loop will run
+	 * @param offset - start position in the world
+	 * @param y - height position
+	 * @param pos - position in the array to start the loop <p>
+	 * 
+	 * @author Jacob
+	 */
+	public void genCubes(int times, int offset, float y, int pos){
+		for(int x = 0 + pos; x < times; x++){
+			cubeArray[x] = new Cubes(world, (x * TEN) + offset, y);
 		}
 	}
 	
