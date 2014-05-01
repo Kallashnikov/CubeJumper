@@ -1,4 +1,4 @@
-package com.me.cubejumper;
+package com.me.cubejumper.levels;
 
 import java.util.Random;
 
@@ -13,23 +13,24 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.Spikes;
+import com.me.cubejumper.bases.BaseLevel;
 
 /**
- * Currently just level 2, just miss named at the moment.
+ * Currently just level 2, just miss-named at the moment.
  * 
  * @author Jacob
  */
-public class PlayScreen extends LevelBase
+public class PlayScreen extends BaseLevel
 {
 	private static final int TEN = 10;
-	
-	Spikes spike, spike2, spike3, spike4, spike5, spike6, spike7;
 	
 	Spikes[] spikeArray = new Spikes[100];
 	Random random;
 	
 	public PlayScreen(CubeJumper game) {
-		LevelBase.game = game;
+		BaseLevel.game = game;
 	}
 	@Override
 	public void render(float delta) {

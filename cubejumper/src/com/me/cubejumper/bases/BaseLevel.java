@@ -1,4 +1,4 @@
-package com.me.cubejumper;
+package com.me.cubejumper.bases;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -11,6 +11,9 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.me.cubejumper.ContactHandler;
+import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.Player;
 
 /** 
  * Basis for all level classes, it contains:<p>
@@ -25,7 +28,7 @@ import com.badlogic.gdx.physics.box2d.World;
  *
  *	@author Jacob
  */
-public class LevelBase implements Screen
+public class BaseLevel implements Screen
 {
 	private static final float TIMESTEP = 1 / 60f;
 	private static final int VELOCITYIT = 8;
@@ -34,6 +37,10 @@ public class LevelBase implements Screen
 	public int width, height;
 	public static float startTime, endTime;
 	public static float highScore = 0;
+	public static boolean isSlowMotion = false;
+	public static float slow = 120f;
+	
+	private static final float SLOWMOTION = 1 / slow;
 	
 	protected static CubeJumper game;
 	
@@ -83,8 +90,11 @@ public class LevelBase implements Screen
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
-	
+		if(isSlowMotion) 
+			world.step(SLOWMOTION, VELOCITYIT, POSITIONIT);
+		else
+			world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
+		
 		player.update(camera, delta);
 		camera.update();
 		

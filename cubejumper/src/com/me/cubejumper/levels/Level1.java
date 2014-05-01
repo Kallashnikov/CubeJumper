@@ -1,4 +1,9 @@
-package com.me.cubejumper;
+package com.me.cubejumper.levels;
+
+import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.Cubes;
+import com.me.cubejumper.Spikes;
+import com.me.cubejumper.bases.BaseLevel;
 
 import box2dLight.RayHandler;
 
@@ -7,7 +12,7 @@ import box2dLight.RayHandler;
  * 
  * @author Jacob
  */
-public class Level1 extends LevelBase
+public class Level1 extends BaseLevel
 {
 	private static final int TEN = 10;
 	
@@ -17,7 +22,7 @@ public class Level1 extends LevelBase
 	private RayHandler handler;
 	
 	public Level1(CubeJumper game) {
-		LevelBase.game = game;
+		BaseLevel.game = game;
 	}
 	
 	public void show() {

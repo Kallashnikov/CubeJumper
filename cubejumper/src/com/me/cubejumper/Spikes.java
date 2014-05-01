@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.me.cubejumper.bases.BaseObject;
 
 /**
  * A triangular shape which is deadly to the touch.<p>
@@ -13,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
  * 
  * @author Jacob
  */
-public class Spikes extends ObjectBase
+public class Spikes extends BaseObject
 {	
 	/**
 	 * A static and non-moving Spike.

@@ -12,6 +12,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
+import com.me.cubejumper.bases.BaseLevel;
+import com.me.cubejumper.levels.PlayScreen;
 
 /**
  * Controls movement, updating, rotation, and the player body.
@@ -145,7 +147,8 @@ public class Player implements InputProcessor
 			movement.x = -speed;
 			break;
 		case Keys.S:
-			isDevMode = true;
+		//	isDevMode = true;
+			BaseLevel.isSlowMotion = true;
 			break;
 		case Keys.D: 
 			movement.x = speed;
@@ -168,6 +171,7 @@ public class Player implements InputProcessor
 			movement.x = 0;
 			break;
 		case Keys.S:
+			BaseLevel.isSlowMotion = false;
 			break;
 		case Keys.D:
 			movement.x = 0;

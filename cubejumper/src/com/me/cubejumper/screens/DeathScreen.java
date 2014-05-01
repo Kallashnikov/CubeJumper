@@ -1,4 +1,4 @@
-package com.me.cubejumper;
+package com.me.cubejumper.screens;
 
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -19,6 +21,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.me.cubejumper.ActorAccessor;
+import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.bases.BaseScreen;
+import com.me.cubejumper.levels.Level1;
+import com.me.cubejumper.levels.PlayScreen;
 
 /** 
  * On the player's death(i.e. makes contact with a spike), this screen
@@ -26,23 +33,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
  *
  *	@author Jacob
  */
-public class DeathScreen implements Screen 
+public class DeathScreen extends BaseScreen
 {
-	private int width = Gdx.graphics.getWidth() / 5;
-	private int height = Gdx.graphics.getHeight() / 5;
-	
-	private CubeJumper game;
-	private PlayScreen play;
-	
-	private Stage stage;
-	private TextureAtlas atlas;
-	private Skin skin;
-	private Table table;
+	private Level1 level1;
+
 	private TextButton buttonRestart;
-	private BitmapFont white, black;
-	private Label heading, time;
-	private SpriteBatch batch;
-	private TweenManager tween;
+	private Label time;
 	
 	public DeathScreen(CubeJumper game) {
 		this.game = game;
@@ -50,30 +46,18 @@ public class DeathScreen implements Screen
 	
 	@Override
 	public void show() {
-		batch = new SpriteBatch();
+		super.show();
 		
-		stage = new Stage();
-		
-		atlas = new TextureAtlas("ui/bluebutton9.pack");
-		skin = new Skin();
-		skin.addRegions(atlas);
-		
-		table = new Table(skin);
-		table.setBounds(0, 0, width, height);
-		
-		//font
-		white = new BitmapFont(Gdx.files.internal("ui/white.fnt"), false);
-		
-		//buttons
-		TextButtonStyle buttonStyle = new TextButtonStyle();
-		buttonStyle.up = skin.getDrawable("bluebutton");
-		buttonStyle.down = skin.getDrawable("bluebutton_highlighted");
-		buttonStyle.over = skin.getDrawable("bluebutton_highlighted");
-		buttonStyle.pressedOffsetX = 1;
-		buttonStyle.pressedOffsetY = -1;
-		buttonStyle.font = white;
-		
-		LabelStyle headingStyle = new LabelStyle(white, Color.WHITE);
+		buttonRestart = new TextButton("Retry?", buttonStyle);
+		buttonRestart.pad(5);
+		buttonRestart.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				game.setScreen(new Level1(game));
+				return true;
+			}
+		});
 		
 		//labels
 		heading = new Label("GAME OVER!", headingStyle);
@@ -85,12 +69,12 @@ public class DeathScreen implements Screen
 		table.getCell(heading).padBottom(10);
 		table.row();
 		table.add(time);
+		table.getCell(time).padBottom(10);
+		table.row();
+		table.add(buttonRestart);
 		table.debug();
 		
 		stage.addActor(table);
-		
-		tween = new TweenManager();
-		Tween.registerAccessor(Actor.class, new ActorAccessor());
 		
 		//table fade in
 		Tween.from(table, ActorAccessor.ALPHA, 1f).target(0).start(tween);
@@ -104,50 +88,31 @@ public class DeathScreen implements Screen
 	
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1f);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		Table.drawDebug(stage);
-		
-		tween.update(delta);
-		
-		stage.act(delta);
-		
-		batch.begin();
-			stage.draw();
-		batch.end();
+		super.render(delta);
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		stage.setViewport(width, height, true);
-		
-		table.invalidateHierarchy();
-		table.setSize(width, height);
+		super.resize(width, height);
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-
+		super.hide();
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-
+		super.pause();
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-
+		super.resume();
 	}
 
 	@Override
 	public void dispose() {
-		stage.dispose();
-		batch.dispose();
+		super.dispose();
 	}
-
 }

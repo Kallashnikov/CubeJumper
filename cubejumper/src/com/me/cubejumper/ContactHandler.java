@@ -5,6 +5,8 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.me.cubejumper.levels.PlayScreen;
+import com.me.cubejumper.screens.DeathScreen;
 
 /**
  * Handles all contacts in the world.

@@ -1,104 +1,34 @@
-package com.me.cubejumper;
+package com.me.cubejumper.screens;
 
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenManager;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.me.cubejumper.ActorAccessor;
+import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.bases.BaseScreen;
+import com.me.cubejumper.levels.Level1;
 
 /**
  * Creates a menu, with the title, and 2 buttons for starting the game and exiting.
  * 
  * @author Jacob
  */
-public class MainMenu implements Screen
+public class MainMenu extends BaseScreen
 {
-	private CubeJumper game;
-	
-	private Stage stage;
-	private TextureAtlas atlas;
-	private Skin skin;
-	private Table table;
+	private Label version;
 	private TextButton buttonPlay, buttonExit;
-	private BitmapFont white, black;
-	private Label heading;
-	private SpriteBatch batch;
-	private TweenManager tween;
-	
-	private int width = Gdx.graphics.getWidth();
-	private int height = Gdx.graphics.getHeight();
 	
 	public MainMenu(CubeJumper game) {
 		this.game = game;
 	}
-	
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1f);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		Table.drawDebug(stage);
-		
-		tween.update(delta);
-		
-		stage.act(delta);
-		
-		batch.begin();
-			stage.draw();
-		batch.end();
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		stage.setViewport(width, height, true);
-		
-		table.invalidateHierarchy();
-		table.setSize(width, height);
-	}
 
 	@Override
 	public void show() {
-		batch = new SpriteBatch();
-		
-		stage = new Stage();
-		
-		Gdx.input.setInputProcessor(stage);
-		
-		atlas = new TextureAtlas("ui/bluebutton9.pack");
-		skin = new Skin();
-		skin.addRegions(atlas);
-		
-		table = new Table(skin);
-		table.setBounds(0, 0, width, height);
-		
-		//font setup
-		white = new BitmapFont(Gdx.files.internal("ui/white.fnt"), false);
-		black = new BitmapFont(Gdx.files.internal("ui/black.fnt"), false);
-		
-		//buttons
-		TextButtonStyle buttonStyle = new TextButtonStyle();
-		buttonStyle.up = skin.getDrawable("bluebutton");
-		buttonStyle.down = skin.getDrawable("bluebutton_highlighted");
-		buttonStyle.over = skin.getDrawable("bluebutton_highlighted");
-		buttonStyle.pressedOffsetX = 1;
-		buttonStyle.pressedOffsetY = -1;
-		buttonStyle.font = white;
+		super.show();
 		
 		//button instantiation
 		buttonPlay = new TextButton("Play", buttonStyle);
@@ -125,10 +55,10 @@ public class MainMenu implements Screen
 			}
 		});
 		
-		LabelStyle headingStyle = new LabelStyle(white, Color.WHITE);
-		
 		heading = new Label(CubeJumper.TITLE, headingStyle);
 		heading.setFontScale(2.5f);
+		version = new Label(CubeJumper.VERSION, headingStyle);
+		version.setFontScale(.5f);
 		
 		table.add(heading);
 		table.getCell(heading).padBottom(75);
@@ -137,14 +67,12 @@ public class MainMenu implements Screen
 		table.getCell(buttonPlay).padBottom(10);
 		table.row();
 		table.add(buttonExit);
-		table.getCell(buttonExit).padLeft(25);
+		table.getCell(buttonExit).padLeft(25).padBottom(10);
+		table.row();
+		table.add(version);
 		table.debug();
 		
 		stage.addActor(table);
-		
-		//animations
-		tween = new TweenManager();
-		Tween.registerAccessor(Actor.class, new ActorAccessor());
 		
 		//table fade in
 		Tween.from(table, ActorAccessor.ALPHA, .5f).target(0).start(tween);
@@ -177,33 +105,35 @@ public class MainMenu implements Screen
 			.push(Tween.to(heading, ActorAccessor.RGB, .5f).target(1, 1, 1))
 			.end().repeat(Tween.INFINITY, 0).start(tween);
 	}
-
+	
+	@Override
+	public void render(float delta) {
+		super.render(delta);
+	}
+	
+	@Override
+	public void resize(int width, int height) {
+		super.resize(width, height);
+	}
+	
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
+		super.hide();
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-		
+		super.pause();
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
+		super.pause();
 	}
 
 	@Override
 	public void dispose() {
-		batch.dispose();
-		stage.dispose();
-		atlas.dispose();
-		white.dispose();
-		black.dispose();
-		skin.dispose();
+		super.dispose();
 	}
 
 }

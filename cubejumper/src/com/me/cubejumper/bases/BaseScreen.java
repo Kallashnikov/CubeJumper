@@ -1,5 +1,6 @@
-package com.me.cubejumper;
+package com.me.cubejumper.bases;
 
+import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
@@ -9,15 +10,22 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.me.cubejumper.ActorAccessor;
+import com.me.cubejumper.CubeJumper;
 
+/**
+ * Base class for all screens.
+ * 
+ * @author Jacob
+ */
 public class BaseScreen implements Screen
 {
 	protected CubeJumper game;
@@ -26,7 +34,6 @@ public class BaseScreen implements Screen
 	protected TextureAtlas atlas;
 	protected Skin skin;
 	protected Table table;
-	protected TextButton buttonPlay, buttonExit;
 	protected TextButtonStyle buttonStyle;
 	protected LabelStyle headingStyle;
 	protected BitmapFont white, black;
@@ -66,6 +73,10 @@ public class BaseScreen implements Screen
 		buttonStyle.font = white;
 		
 		headingStyle = new LabelStyle(white, Color.WHITE);
+		
+		//animations
+		tween = new TweenManager();
+		Tween.registerAccessor(Actor.class, new ActorAccessor());
 	}
 	
 	@Override
@@ -86,32 +97,32 @@ public class BaseScreen implements Screen
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+		stage.setViewport(width, height, true);
 		
+		table.invalidateHierarchy();
+		table.setSize(width, height);
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		batch.dispose();
+		stage.dispose();
+		atlas.dispose();
+		white.dispose();
+		black.dispose();
+		skin.dispose();
 	}
 
 }
