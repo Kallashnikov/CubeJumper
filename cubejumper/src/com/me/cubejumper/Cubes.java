@@ -22,11 +22,11 @@ public class Cubes extends BaseObject
 	public Cubes(World world, float x, float y) {
 		this.world = world;
 		
-		init(x, y);
+		initPoly(x, y);
 		
 		//Rectangle
 		//shape.setAsBox(5, 5);
-		shape.set(new Vector2[]{new Vector2(0,0), new Vector2(0, 10), new Vector2(10, 0), new Vector2(10, 10)});
+		poly.set(new Vector2[]{new Vector2(0,0), new Vector2(0, 10), new Vector2(10, 0), new Vector2(10, 10)});
 		
 		//Fixture definition
 		fixDef.density = 1f;

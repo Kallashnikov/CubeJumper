@@ -64,7 +64,7 @@ public class BaseLevel implements Screen
 		
 		world = new World(new Vector2(15f, -100f), true);
 		debugRenderer = new Box2DDebugRenderer();
-		conHandler = new ContactHandler(game);
+		conHandler = new ContactHandler(game, world);
 		
 		player = new Player(world);
 		Gdx.input.setInputProcessor(player);

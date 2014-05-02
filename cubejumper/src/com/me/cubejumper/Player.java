@@ -88,7 +88,7 @@ public class Player implements InputProcessor
 		body.applyForceToCenter(movement, true);
 		
 		camera.position.set(body.getPosition().x, body.getPosition().y, 0);
-		System.out.println(canJump);
+		//System.out.println(canJump);
 		
 		currX = Gdx.input.getAccelerometerX();
 		currY = Gdx.input.getAccelerometerY();
@@ -123,12 +123,18 @@ public class Player implements InputProcessor
 		}else{
 			body.setLinearVelocity(body.getLinearVelocity());
 		}
+		
+		if(body.getAngularVelocity() < -5.89f) {
+			body.setAngularVelocity(-5.89f);
+		}else{
+			body.setAngularVelocity(body.getAngularVelocity());
+		}
 	}
 	
 	public void jump() {
 		float impulse = body.getMass() * 65;
 		body.applyLinearImpulse(new Vector2(0, impulse), body.getWorldCenter(), true);
-		body.applyAngularImpulse(-6500, true);
+		body.applyAngularImpulse(-7300, true);
 	}
 
 	@Override
@@ -137,8 +143,7 @@ public class Player implements InputProcessor
 		case Keys.W:
 			if(isDevMode) {
 				world.setGravity(new Vector2(0, 0));
-				world.setContactListener(null);
-				canJump = true;
+				jump();
 			}else if(canJump) {
 				jump();
 			}
@@ -147,7 +152,7 @@ public class Player implements InputProcessor
 			movement.x = -speed;
 			break;
 		case Keys.S:
-		//	isDevMode = true;
+			isDevMode = true;
 			BaseLevel.isSlowMotion = true;
 			break;
 		case Keys.D: 
@@ -164,6 +169,7 @@ public class Player implements InputProcessor
 		switch(keycode) {
 		case Keys.W:
 			if(isDevMode){
+				canJump = false;
 			}else
 				canJump = false;
 			break;
@@ -171,6 +177,7 @@ public class Player implements InputProcessor
 			movement.x = 0;
 			break;
 		case Keys.S:
+			isDevMode = false;
 			BaseLevel.isSlowMotion = false;
 			break;
 		case Keys.D:

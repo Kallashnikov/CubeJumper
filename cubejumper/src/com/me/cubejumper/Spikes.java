@@ -26,12 +26,12 @@ public class Spikes extends BaseObject
 	 */
 	public Spikes(World world, float x, float y) {
 		//Body definition
-		init(x, y);
+		initPoly(x, y);
 		
 		bodyDef.type = BodyType.StaticBody;
 				
 		//Player's rectangle
-		shape.set(new Vector2[]{new Vector2(0,0), new Vector2(5, 10), new Vector2(10, 0)});
+		poly.set(new Vector2[]{new Vector2(0,0), new Vector2(5, 10), new Vector2(10, 0)});
 				
 		//fixture definition
 		fixDef.density = 1;
@@ -56,18 +56,14 @@ public class Spikes extends BaseObject
 	 */
 	public Spikes(World world, float x, float y, float dens, float frict, float rest) {
 		//Body definition
-		bodyDef = new BodyDef();
+		initPoly(x, y);
+		
 		bodyDef.type = BodyType.DynamicBody;
-		bodyDef.position.set(x, y);
-		bodyDef.active = true;
 		
 		//Player's rectangle
-		shape = new PolygonShape();
-		shape.set(new Vector2[]{new Vector2(0,0), new Vector2(5, 10), new Vector2(10, 0)});
+		poly.set(new Vector2[]{new Vector2(0,0), new Vector2(5, 10), new Vector2(10, 0)});
 		
 		//fixture definition
-		fixDef = new FixtureDef();
-		fixDef.shape = shape;
 		fixDef.density = dens;
 		fixDef.friction = frict;
 		fixDef.restitution = rest;

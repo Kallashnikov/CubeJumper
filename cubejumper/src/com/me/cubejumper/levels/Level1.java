@@ -2,6 +2,7 @@ package com.me.cubejumper.levels;
 
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Cubes;
+import com.me.cubejumper.PowerUpSloMo;
 import com.me.cubejumper.Spikes;
 import com.me.cubejumper.bases.BaseLevel;
 
@@ -18,6 +19,7 @@ public class Level1 extends BaseLevel
 	
 	private Spikes[] spikeArray = new Spikes[100];
 	private Cubes[] cubeArray = new Cubes[100];
+	private PowerUpSloMo slomo;
 	
 	private RayHandler handler;
 	
@@ -29,6 +31,8 @@ public class Level1 extends BaseLevel
 		super.show();
 		
 		handler = new RayHandler(world);
+		
+		slomo = new PowerUpSloMo(world, 10, 7f);
 		
 //		ConeLight light = new ConeLight(handler, 200, Color.BLUE, 1000, 20, 20, 30, 90);
 //		light.setSoft(true);

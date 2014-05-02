@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.World;
 import com.me.cubejumper.levels.PlayScreen;
 import com.me.cubejumper.screens.DeathScreen;
 
@@ -18,8 +19,11 @@ public class ContactHandler implements ContactListener
 	private CubeJumper game;
 	private PlayScreen play;
 	
-	public ContactHandler(CubeJumper game) {
+	private World world;
+	
+	public ContactHandler(CubeJumper game, World world) {
 		this.game = game;
+		this.world = world;
 	}
 	
 	@Override
@@ -42,6 +46,10 @@ public class ContactHandler implements ContactListener
 		}else if((returnData(a, 1) && returnData(b, 4))
 				|| (returnData(a, 4) && returnData(b, 1))){
 			Player.canJump = true;
+		}else if((returnData(a, 1) && returnData(b, 5))
+				|| (returnData(a, 5) && returnData(b, 1))){
+			System.out.println("Player has touched a power up!");
+			//world.step(timeStep, velocityIterations, positionIterations)
 		}
 	}
 	
