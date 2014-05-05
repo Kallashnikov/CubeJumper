@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.me.cubejumper.ContactHandler;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
+import com.me.cubejumper.PowerUpSloMo;
 
 /** 
  * Basis for all level classes, it contains:<p>
@@ -30,24 +31,21 @@ import com.me.cubejumper.Player;
  */
 public class BaseLevel implements Screen
 {
-	private static final float TIMESTEP = 1 / 60f;
-	private static final int VELOCITYIT = 8;
-	private static final int POSITIONIT = 3;
+	protected static final float TIMESTEP = 1 / 60f;
+	protected static final int VELOCITYIT = 8;
+	protected static final int POSITIONIT = 3;
 	
 	public int width, height;
 	public static float startTime, endTime;
 	public static float highScore = 0;
 	public static boolean isSlowMotion = false;
-	public static float slow = 120f;
-	
-	private static final float SLOWMOTION = 1 / slow;
 	
 	protected static CubeJumper game;
 	
 	private Player player;
 	private ContactHandler conHandler;
 	
-	public World world;
+	protected World world;
 	private Box2DDebugRenderer debugRenderer;
 	protected OrthographicCamera camera;
 	
@@ -90,10 +88,7 @@ public class BaseLevel implements Screen
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		if(isSlowMotion) 
-			world.step(SLOWMOTION, VELOCITYIT, POSITIONIT);
-		else
-			world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
+		//world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
 		
 		player.update(camera, delta);
 		camera.update();

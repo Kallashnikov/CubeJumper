@@ -1,5 +1,6 @@
 package com.me.cubejumper;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -16,6 +17,7 @@ import com.me.cubejumper.bases.BaseObject;
  */
 public class Spikes extends BaseObject
 {	
+	Vector2[] vertices = new Vector2[]{new Vector2(0,0), new Vector2(5, 10), new Vector2(10, 0)};
 	/**
 	 * A static and non-moving Spike.
 	 * @param world
@@ -30,8 +32,8 @@ public class Spikes extends BaseObject
 		
 		bodyDef.type = BodyType.StaticBody;
 				
-		//Player's rectangle
-		poly.set(new Vector2[]{new Vector2(0,0), new Vector2(5, 10), new Vector2(10, 0)});
+		//Spike points
+		poly.set(vertices);
 				
 		//fixture definition
 		fixDef.density = 1;

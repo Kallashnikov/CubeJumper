@@ -19,7 +19,7 @@ public class Level1 extends BaseLevel
 	
 	private Spikes[] spikeArray = new Spikes[100];
 	private Cubes[] cubeArray = new Cubes[100];
-	private PowerUpSloMo slomo;
+	private PowerUpSloMo sloMo;
 	
 	private RayHandler handler;
 	
@@ -32,7 +32,7 @@ public class Level1 extends BaseLevel
 		
 		handler = new RayHandler(world);
 		
-		slomo = new PowerUpSloMo(world, 10, 7f);
+		sloMo = new PowerUpSloMo(world, 75, 37.5f);
 		
 //		ConeLight light = new ConeLight(handler, 200, Color.BLUE, 1000, 20, 20, 30, 90);
 //		light.setSoft(true);
@@ -41,8 +41,8 @@ public class Level1 extends BaseLevel
 		genCubes(2, 50, 1.5f, 0);
 		genCubes(3, 50, 11.5f, 2);
 		genSpikes(4, 100, 1.5f, 0);
-		genSpikes(7, 140, 1.5f, 4);
-		genSpikes(9, 160, 11.5f, 7);
+		genSpikes(6, 140, 1.5f, 4);
+		genSpikes(8, 160, 11.5f, 6);
 	}
 	
 	/**
@@ -75,6 +75,11 @@ public class Level1 extends BaseLevel
 	
 	public void render(float delta) {
 		super.render(delta);
+		
+		if(isSlowMotion) {
+			sloMo.activate(delta);
+		}else
+			world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
 		
 //		handler.setCombinedMatrix(camera.combined);
 //		handler.updateAndRender();

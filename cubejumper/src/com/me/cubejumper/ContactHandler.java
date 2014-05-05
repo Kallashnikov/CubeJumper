@@ -1,11 +1,15 @@
 package com.me.cubejumper;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.levels.PlayScreen;
 import com.me.cubejumper.screens.DeathScreen;
 
@@ -49,7 +53,7 @@ public class ContactHandler implements ContactListener
 		}else if((returnData(a, 1) && returnData(b, 5))
 				|| (returnData(a, 5) && returnData(b, 1))){
 			System.out.println("Player has touched a power up!");
-			//world.step(timeStep, velocityIterations, positionIterations)
+			BaseLevel.isSlowMotion = true;
 		}
 	}
 	
