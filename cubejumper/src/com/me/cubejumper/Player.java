@@ -34,19 +34,19 @@ import com.me.cubejumper.levels.PlayScreen;
  * 
  * @author Jacob
  */
-public class Player implements InputProcessor
+public class Player
 {
 	private int width = Gdx.graphics.getWidth() / 5;
 	private int height = Gdx.graphics.getHeight() / 5;
-	private Vector2 movement = new Vector2(0, 0);
-	private float speed = 50;
+	public Vector2 movement = new Vector2(0, 0);
+	public static float speed = 50;
 	public static boolean canJump = true;
 	public static int xLimit = 60, yLimit = 55;
 	
 	public boolean available = Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer);
 	public float currX, currY, currZ;
 	public float posX, posY, posZ;
-	private boolean isDevMode = false;
+	public boolean isDevMode = false;
 	
 	private PlayScreen play;
 	
@@ -135,97 +135,5 @@ public class Player implements InputProcessor
 		float impulse = body.getMass() * 65;
 		body.applyLinearImpulse(new Vector2(0, impulse), body.getWorldCenter(), true);
 		body.applyAngularImpulse(-7300, true);
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		switch(keycode) {
-		case Keys.W:
-			if(isDevMode) {
-				world.setGravity(new Vector2(0, 0));
-				jump();
-			}else if(canJump) {
-				jump();
-			}
-			break;
-		case Keys.A:
-			movement.x = -speed;
-			break;
-		case Keys.S:
-			isDevMode = true;
-			BaseLevel.isSlowMotion = true;
-			break;
-		case Keys.D: 
-			movement.x = speed;
-			break;
-		default:
-			break;
-		}
-		return true;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		switch(keycode) {
-		case Keys.W:
-			if(isDevMode){
-				canJump = false;
-			}else
-				canJump = false;
-			break;
-		case Keys.A:
-			movement.x = 0;
-			break;
-		case Keys.S:
-			isDevMode = false;
-			BaseLevel.isSlowMotion = false;
-			break;
-		case Keys.D:
-			movement.x = 0;
-			break;
-		default:
-			break;
-		}
-		return true;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer,
-			int button) {
-		if(canJump) {
-			jump();
-		}
-		return true;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer,
-			int button) {
-		canJump = false;
-		return true;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

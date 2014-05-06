@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.me.cubejumper.ContactHandler;
 import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.InputHandler;
 import com.me.cubejumper.Player;
 import com.me.cubejumper.objects.powerups.PowerUpSloMo;
 
@@ -44,6 +45,7 @@ public class BaseLevel implements Screen
 	
 	private Player player;
 	private ContactHandler conHandler;
+	private InputHandler inputHandler;
 	
 	protected World world;
 	private Box2DDebugRenderer debugRenderer;
@@ -65,7 +67,8 @@ public class BaseLevel implements Screen
 		conHandler = new ContactHandler(game, world);
 		
 		player = new Player(world);
-		Gdx.input.setInputProcessor(player);
+		inputHandler = new InputHandler(world, player);
+		Gdx.input.setInputProcessor(inputHandler);
 		
 		world.setContactListener(conHandler);
 		

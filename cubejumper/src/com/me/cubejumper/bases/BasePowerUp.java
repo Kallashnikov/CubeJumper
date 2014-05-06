@@ -5,7 +5,7 @@ public class BasePowerUp extends BaseObject
 	protected float time = 0;
 	
 	public void init(float x, float y) {
-		initPoly(x, y);
+		initCircle(x, y);
 		
 		circle.setRadius(2.5f);
 		
