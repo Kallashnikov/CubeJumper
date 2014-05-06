@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.me.cubejumper.ContactHandler;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
-import com.me.cubejumper.PowerUpSloMo;
+import com.me.cubejumper.objects.powerups.PowerUpSloMo;
 
 /** 
  * Basis for all level classes, it contains:<p>

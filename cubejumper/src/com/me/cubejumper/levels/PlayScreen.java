@@ -14,8 +14,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.me.cubejumper.CubeJumper;
-import com.me.cubejumper.Spikes;
 import com.me.cubejumper.bases.BaseLevel;
+import com.me.cubejumper.objects.Spikes;
 
 /**
  * Currently just level 2, just miss-named at the moment.

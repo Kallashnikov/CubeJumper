@@ -1,4 +1,4 @@
-package com.me.cubejumper;
+package com.me.cubejumper.objects;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;

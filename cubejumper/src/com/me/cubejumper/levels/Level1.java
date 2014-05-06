@@ -1,10 +1,10 @@
 package com.me.cubejumper.levels;
 
 import com.me.cubejumper.CubeJumper;
-import com.me.cubejumper.Cubes;
-import com.me.cubejumper.PowerUpSloMo;
-import com.me.cubejumper.Spikes;
 import com.me.cubejumper.bases.BaseLevel;
+import com.me.cubejumper.objects.Cubes;
+import com.me.cubejumper.objects.Spikes;
+import com.me.cubejumper.objects.powerups.PowerUpSloMo;
 
 import box2dLight.RayHandler;
 

@@ -1,12 +1,12 @@
-package com.me.cubejumper;
+package com.me.cubejumper.objects.powerups;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.bases.BaseObject;
+import com.me.cubejumper.bases.BasePowerUp;
 
-public class PowerUpSloMo extends BaseObject
+public class PowerUpSloMo extends BasePowerUp
 {
 	private static final int VELOCITYIT = 8;
 	private static final int POSITIONIT = 3;
@@ -16,7 +16,6 @@ public class PowerUpSloMo extends BaseObject
 	private static final float SLOWMOTION = 1 / slow;
 	
 	private static final float WAIT_TIME = 5f;
-	private float time = 0;
 	
 	private Vector2 pos;
 	//pentagon
@@ -36,16 +35,7 @@ public class PowerUpSloMo extends BaseObject
 	public PowerUpSloMo(World world, float x, float y) {
 		this.world = world;
 		
-		initCircle(x, y);
-		
-		//Circle
-		circle.setRadius(2.5f);
-		
-		//Fixture definition
-		fixDef.density = 1f;
-		fixDef.friction = 0;
-		fixDef.restitution = 0;
-		fixDef.isSensor = true;
+		init(x, y);
 		
 		body = world.createBody(bodyDef);
 		body.setUserData(5);
@@ -53,7 +43,7 @@ public class PowerUpSloMo extends BaseObject
 	}
 	
 	public void activate(float delta) {
-		time += delta;
+		super.activate(delta);
 		if(time <= WAIT_TIME) {
 			world.step(SLOWMOTION, VELOCITYIT, POSITIONIT);
 		}else{
