@@ -17,6 +17,7 @@ public class PowerUpSloMo extends BasePowerUp
 	
 	private static final float WAIT_TIME = 5f;
 	
+	@SuppressWarnings("unused")
 	private Vector2 pos;
 	//pentagon
 	//private Vector2[] vertices = {new Vector2(0,0), new Vector2(1.667f * 2, -1.667f * 2), new Vector2(3.334f * 2, -1.667f * 2), new Vector2(5 * 2, 0), new Vector2(5 * 2, 1.667f * 2), new Vector2(3.334f * 2, 3.334f * 2), new Vector2(1.667f * 2, 3.334f * 2), new Vector2(0, 1.667f * 2)};

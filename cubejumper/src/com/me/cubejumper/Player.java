@@ -23,6 +23,7 @@ import com.me.cubejumper.levels.PlayScreen;
  * @param canJump (boolean) - can the player jump
  * @param xLimit (int) - limits x velocity
  * @param yLimit (int) - limits y velocity
+ * @param angVel (float) - limits angular velocity
  * @param available (boolean) - checks if there is an Accelerometer
  * @param currX (float)
  * @param currY	(float)
@@ -42,6 +43,7 @@ public class Player
 	public static float speed = 50;
 	public static boolean canJump = true;
 	public static int xLimit = 60, yLimit = 55;
+	public static float angVel = -5.89f;
 	
 	public boolean available = Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer);
 	public float currX, currY, currZ;
@@ -88,8 +90,8 @@ public class Player
 		body.applyForceToCenter(movement, true);
 		
 		camera.position.set(body.getPosition().x, body.getPosition().y, 0);
-		//System.out.println(canJump);
 		
+		/*
 		currX = Gdx.input.getAccelerometerX();
 		currY = Gdx.input.getAccelerometerY();
 		currZ = Gdx.input.getAccelerometerZ();
@@ -105,6 +107,8 @@ public class Player
 				movement.x = 0;
 			}
 		}
+		**/
+
 		
 		//limits the acceleration of the body
 		//to prevent it from traveling infinitely faster
@@ -124,8 +128,8 @@ public class Player
 			body.setLinearVelocity(body.getLinearVelocity());
 		}
 		
-		if(body.getAngularVelocity() < -5.89f) {
-			body.setAngularVelocity(-5.89f);
+		if(body.getAngularVelocity() < angVel) {
+			body.setAngularVelocity(angVel);
 		}else{
 			body.setAngularVelocity(body.getAngularVelocity());
 		}

@@ -60,6 +60,8 @@ public class BaseLevel implements Screen
 		width = Gdx.graphics.getWidth() / 5;
 		height = Gdx.graphics.getHeight() / 5;
 		
+		isSlowMotion = false;
+		
 		camera = new OrthographicCamera(width, height);
 		
 		world = new World(new Vector2(15f, -100f), true);
