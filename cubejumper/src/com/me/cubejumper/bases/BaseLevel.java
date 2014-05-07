@@ -4,18 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.me.cubejumper.ContactHandler;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.InputHandler;
 import com.me.cubejumper.Player;
-import com.me.cubejumper.objects.powerups.PowerUpSloMo;
 
 /** 
  * Basis for all level classes, it contains:<p>
@@ -40,6 +39,7 @@ public class BaseLevel implements Screen
 	public static float startTime, endTime;
 	public static float highScore = 0;
 	public static boolean isSlowMotion = false;
+	public static boolean isSuperJump = false;
 	
 	protected static CubeJumper game;
 	
@@ -50,6 +50,7 @@ public class BaseLevel implements Screen
 	protected World world;
 	private Box2DDebugRenderer debugRenderer;
 	protected OrthographicCamera camera;
+	public ShapeRenderer shapeRender;
 	
 	private Body groundBody;
 	private BodyDef groundBodyDef;
@@ -61,6 +62,8 @@ public class BaseLevel implements Screen
 		height = Gdx.graphics.getHeight() / 5;
 		
 		isSlowMotion = false;
+		isSuperJump = false;
+		BasePowerUp.count = 0;
 		
 		camera = new OrthographicCamera(width, height);
 		
@@ -92,8 +95,6 @@ public class BaseLevel implements Screen
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		//world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
 		
 		player.update(camera, delta);
 		camera.update();

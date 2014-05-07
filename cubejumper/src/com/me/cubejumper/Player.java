@@ -1,8 +1,6 @@
 package com.me.cubejumper;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
@@ -12,8 +10,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
-import com.me.cubejumper.bases.BaseLevel;
-import com.me.cubejumper.levels.PlayScreen;
 
 /**
  * Controls movement, updating, rotation, and the player body.
@@ -37,30 +33,23 @@ import com.me.cubejumper.levels.PlayScreen;
  */
 public class Player
 {
-	private int width = Gdx.graphics.getWidth() / 5;
-	private int height = Gdx.graphics.getHeight() / 5;
 	public Vector2 movement = new Vector2(0, 0);
 	public static float speed = 50;
 	public static boolean canJump = true;
 	public static int xLimit = 60, yLimit = 55;
 	public static float angVel = -5.89f;
+	public static int superJump = 1;
 	
 	public boolean available = Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer);
 	public float currX, currY, currZ;
 	public float posX, posY, posZ;
 	public boolean isDevMode = false;
 	
-	private PlayScreen play;
-	
-	private World world;
-	
 	private BodyDef playerDef;
 	private FixtureDef fixDef;
 	private Body body;
 	
 	public Player(World world) {
-		this.world = world;
-		
 		//Body definition
 		playerDef = new BodyDef();
 		playerDef.type = BodyType.DynamicBody;
@@ -136,7 +125,7 @@ public class Player
 	}
 	
 	public void jump() {
-		float impulse = body.getMass() * 65;
+		float impulse = body.getMass() * 65 * superJump;
 		body.applyLinearImpulse(new Vector2(0, impulse), body.getWorldCenter(), true);
 		body.applyAngularImpulse(-7300, true);
 	}

@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.me.cubejumper.bases.BaseLevel;
+import com.me.cubejumper.bases.BasePowerUp;
 
 public class InputHandler implements InputProcessor
 {
@@ -81,9 +82,10 @@ public class InputHandler implements InputProcessor
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer,
 			int button) {
-		if(Player.canJump) {
+		if(Player.canJump)
 			player.jump();
-		}
+		if(BaseLevel.isSuperJump)
+			++BasePowerUp.count;
 		return true;
 	}
 

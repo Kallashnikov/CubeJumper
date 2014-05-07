@@ -1,10 +1,12 @@
 package com.me.cubejumper.levels;
 
+import com.badlogic.gdx.graphics.Color;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.objects.Cubes;
 import com.me.cubejumper.objects.Spikes;
-import com.me.cubejumper.objects.powerups.PowerUpSloMo;
+import com.me.cubejumper.objects.powerups.PUSloMo;
+import com.me.cubejumper.objects.powerups.PUSuperJump;
 
 import box2dLight.RayHandler;
 
@@ -19,7 +21,8 @@ public class Level1 extends BaseLevel
 	
 	private Spikes[] spikeArray = new Spikes[100];
 	private Cubes[] cubeArray = new Cubes[100];
-	private PowerUpSloMo sloMo;
+	private PUSloMo sloMo;
+	private PUSuperJump spJump;
 	
 	private RayHandler handler;
 	
@@ -32,7 +35,8 @@ public class Level1 extends BaseLevel
 		
 		handler = new RayHandler(world);
 		
-		sloMo = new PowerUpSloMo(world, 75, 37.5f);
+		sloMo = new PUSloMo(world, 75, 37.5f);
+		spJump = new PUSuperJump(world, 25, 10);
 		
 //		ConeLight light = new ConeLight(handler, 200, Color.BLUE, 1000, 20, 20, 30, 90);
 //		light.setSoft(true);
@@ -41,8 +45,9 @@ public class Level1 extends BaseLevel
 		genCubes(2, 50, 1.5f, 0);
 		genCubes(3, 50, 11.5f, 2);
 		genSpikes(4, 100, 1.5f, 0);
-		genSpikes(6, 140, 1.5f, 4);
-		genSpikes(8, 160, 11.5f, 6);
+		genSpikes(6, 130, 1.5f, 4);
+		genCubes(4, 180, 11.7f, 3);
+		genSpikes(9, 160, 21.7f, 6);
 	}
 	
 	/**
@@ -80,6 +85,15 @@ public class Level1 extends BaseLevel
 			sloMo.activate(delta);
 		}else
 			world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
+		
+		if(isSuperJump) {
+			spJump.activate(delta);
+		}
+		
+		//System.out.println(100 >> 1);
+		
+		sloMo.color(75, 37.5f, Color.BLUE, camera);
+		spJump.color(25, 10, Color.ORANGE, camera);
 		
 //		handler.setCombinedMatrix(camera.combined);
 //		handler.updateAndRender();
