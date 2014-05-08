@@ -15,11 +15,11 @@ import com.badlogic.gdx.physics.box2d.World;
  * Controls movement, updating, rotation, and the player body.
  * 
  * @param Vector2 movement<p>
- * @param speed (float)
+ * @param speed (float) - 50
  * @param canJump (boolean) - can the player jump
- * @param xLimit (int) - limits x velocity
- * @param yLimit (int) - limits y velocity
- * @param angVel (float) - limits angular velocity
+ * @param xLimit (int) - limits x velocity, 60
+ * @param yLimit (int) - limits y velocity, 55
+ * @param angVel (float) - limits angular velocity, 5.89f
  * @param available (boolean) - checks if there is an Accelerometer
  * @param currX (float)
  * @param currY	(float)
@@ -70,9 +70,9 @@ public class Player
 		body.setUserData(1);
 		body.createFixture(fixDef);
 		
-		posX = Gdx.input.getAccelerometerX();
-		posY = Gdx.input.getAccelerometerY();
-		posZ = Gdx.input.getAccelerometerZ();
+//		posX = Gdx.input.getAccelerometerX();
+//		posY = Gdx.input.getAccelerometerY();
+//		posZ = Gdx.input.getAccelerometerZ();
 	}
 	
 	public void update(Camera camera, float delta) {	
@@ -107,6 +107,8 @@ public class Player
 			}else{
 				body.setLinearVelocity(xLimit, body.getLinearVelocity().y);
 			}
+		}else if(body.getLinearVelocity().x <= -1) {
+			body.setLinearVelocity(-1, body.getLinearVelocity().y);
 		}else if(body.getLinearVelocity().y > yLimit) {
 			if(body.getLinearVelocity().x > xLimit) {
 				body.setLinearVelocity(xLimit, yLimit);

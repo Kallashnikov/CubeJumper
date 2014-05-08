@@ -46,7 +46,6 @@ public class ContactHandler implements ContactListener
 			Player.canJump = true;
 		}else if((returnData(a, 1) && returnData(b, 5))
 				|| (returnData(a, 5) && returnData(b, 1))){
-			System.out.println("Player has touched a power up!");
 			BaseLevel.isSlowMotion = true;
 		}else if((returnData(a, 1) && returnData(b, 6))
 				|| (returnData(a, 6) && returnData(b, 1))){
