@@ -1,12 +1,16 @@
 package com.me.cubejumper.bases;
 
+import java.util.concurrent.TimeUnit;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -24,10 +28,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.me.cubejumper.ContactHandler;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
-import com.me.cubejumper.levels.Level1;
 import com.me.cubejumper.screens.PauseScreen;
 
 /**
@@ -58,6 +62,9 @@ public class BaseLevel implements Screen {
 	private static final int VELOCITYIT = 8;
 	private static final int POSITIONIT = 3;
 
+	private float currentBgx;
+	private long lastTimeBg;
+	
 	public int width, height;
 	public static float startTime, endTime;
 	public static float highScore = 0;
@@ -84,6 +91,7 @@ public class BaseLevel implements Screen {
 	protected Button pauseButton;
 	protected Stage stage;
 	protected TextureAtlas atlas;
+	protected Texture background;
 	protected Skin skin;
 	protected Table table;
 	protected LabelStyle headingStyle;
@@ -96,8 +104,13 @@ public class BaseLevel implements Screen {
 		width = Gdx.graphics.getWidth() / 5;
 		height = Gdx.graphics.getHeight() / 5;
 		batch = new SpriteBatch();
+		background = new Texture(Gdx.files.internal("ui/background.png"));
+		
 		
 		atlas = new TextureAtlas("ui/pausebutton.pack");
+		
+		currentBgx = 800;
+		lastTimeBg = TimeUtils.nanoTime();
 		
 		stage = new Stage();
 		skin = new Skin();
@@ -130,7 +143,6 @@ public class BaseLevel implements Screen {
 		headingStyle = new LabelStyle(white, Color.WHITE);
 
 		camera = new OrthographicCamera(width, height);
-
 		world = new World(new Vector2(15f, -100f), true);
 		debugRenderer = new Box2DDebugRenderer();
 		conHandler = new ContactHandler(game, world);
@@ -161,14 +173,27 @@ public class BaseLevel implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	
+		if(TimeUtils.nanoTime() - lastTimeBg > 100000000){
+			// move the separator 50px
+			currentBgx -= 50;
+			// set the current time to lastTimeBg
+			lastTimeBg = TimeUtils.nanoTime();
+		}
 
+		// if the seprator reaches the screen edge, move it back to the first position
+		if(currentBgx == 0){
+			currentBgx = 800;
+		}
 		//Table.drawDebug(stage);
-
 		stage.act(delta);
-
+		
 		batch.begin();
 		stage.draw();
+		batch.draw(background, currentBgx - 800, 0);
+		batch.draw(background, currentBgx, 0);
 		batch.end();
+		
 		if (isSlowMotion)
 			world.step(SLOWMOTION, VELOCITYIT, POSITIONIT);
 		else
