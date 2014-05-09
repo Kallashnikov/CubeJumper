@@ -37,10 +37,7 @@ public class PUSuperJump extends BasePowerUp
 			Player.superJump = 2;
 			Player.yLimit = 100;
 		}else{
-			Player.superJump = 1;
-			Player.yLimit = 55;
 			BaseLevel.isSuperJump = false;
-			count = 0;
 		}
 	}
 	

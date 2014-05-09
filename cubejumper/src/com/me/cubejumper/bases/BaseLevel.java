@@ -1,7 +1,5 @@
 package com.me.cubejumper.bases;
 
-import java.util.concurrent.TimeUnit;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -11,7 +9,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -34,6 +31,7 @@ import com.me.cubejumper.ContactHandler;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.InputHandler;
 import com.me.cubejumper.Player;
+import com.me.cubejumper.levels.Level1;
 import com.me.cubejumper.screens.PauseScreen;
 
 /**
@@ -61,6 +59,7 @@ public class BaseLevel implements Screen {
 	public int width, height;
 	public static float startTime, endTime;
 	public static float highScore = 0;
+	public static boolean isPaused = false;
 	public static boolean isSlowMotion = false;
 	public static boolean isSuperJump = false;
 	
@@ -128,7 +127,7 @@ public class BaseLevel implements Screen {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				game.setScreen(new PauseScreen(game));
+				pause();
 				return true;
 			}
 		});
@@ -199,12 +198,6 @@ public class BaseLevel implements Screen {
 
 		debugRenderer.render(world, camera.combined);
 	}
-	
-	public static void resetPowerUps() {
-		isSlowMotion = false;
-		isSuperJump = false;
-		BasePowerUp.count = 0;
-	}
 
 	@Override
 	public void resize(int width, int height) {
@@ -216,10 +209,19 @@ public class BaseLevel implements Screen {
 
 	@Override
 	public void pause() {
+		PauseScreen.playerPos = player.getPosition();
+		PauseScreen.playerXYVel = player.getVelocity();
+		PauseScreen.playerRot = player.getAngVelocity();
+		PauseScreen.pausedCanJump = Player.isCanJump();
+		game.setScreen(new PauseScreen(game));
 	}
 
-	@Override
 	public void resume() {
+		//player.setPositionAndAngVelocity(PauseScreen.playerPos, PauseScreen.playerRot);
+		//player.setVelocity(PauseScreen.playerXYVel);
+		//Player.setCanJump(PauseScreen.pausedCanJump);
+		
+		game.setScreen(new Level1(game));
 	}
 
 	@Override

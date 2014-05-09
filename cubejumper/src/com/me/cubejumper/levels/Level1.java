@@ -2,12 +2,12 @@ package com.me.cubejumper.levels;
 
 import com.badlogic.gdx.graphics.Color;
 import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.Player;
 import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.objects.Cubes;
 import com.me.cubejumper.objects.Spikes;
 import com.me.cubejumper.objects.powerups.PUSloMo;
 import com.me.cubejumper.objects.powerups.PUSuperJump;
-
 import box2dLight.RayHandler;
 
 /**
@@ -28,6 +28,10 @@ public class Level1 extends BaseLevel
 	
 	public Level1(CubeJumper game) {
 		BaseLevel.game = game;
+	}
+	
+	public Level1(CubeJumper game, int x) {
+		super.show();
 	}
 	
 	public void show() {
@@ -88,6 +92,10 @@ public class Level1 extends BaseLevel
 		
 		if(isSuperJump) {
 			spJump.activate(delta);
+		}else{
+			Player.superJump = 1;
+			Player.yLimit = 55;
+			PUSuperJump.count = 0;
 		}
 		
 		//System.out.println(100 >> 1);

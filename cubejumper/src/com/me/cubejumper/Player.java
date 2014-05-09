@@ -76,7 +76,7 @@ public class Player
 	}
 	
 	public void update(Camera camera, float delta) {	
-		body.applyForceToCenter(movement, true);
+		//body.applyForceToCenter(movement, true);
 		
 		camera.position.set(body.getPosition().x, body.getPosition().y, 0);
 		
@@ -130,5 +130,33 @@ public class Player
 		float impulse = body.getMass() * 65 * superJump;
 		body.applyLinearImpulse(new Vector2(0, impulse), body.getWorldCenter(), true);
 		body.applyAngularImpulse(-7300, true);
+	}
+	
+	public Vector2 getPosition() {
+		return body.getPosition();
+	}
+	
+	public void setPositionAndAngVelocity(Vector2 position, float playerAngVel) {
+		this.body.setTransform(position, playerAngVel);
+	}
+	
+	public Vector2 getVelocity() {
+		return body.getLinearVelocity();
+	}
+	
+	public void setVelocity(Vector2 velocity) {
+		this.body.setLinearVelocity(velocity);
+	}
+	
+	public float getAngVelocity() {
+		return body.getAngularVelocity();
+	}
+
+	public static boolean isCanJump() {
+		return canJump;
+	}
+
+	public static void setCanJump(boolean canJump) {
+		Player.canJump = canJump;
 	}
 }
