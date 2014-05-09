@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.me.cubejumper.ActorAccessor;
 import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.bases.BaseScreen;
 import com.me.cubejumper.levels.Level1;
 
@@ -23,6 +24,8 @@ public class PauseScreen extends BaseScreen{
 	
 	public void show(){
 		super.show();
+		
+		BaseLevel.resetPowerUps();
 		
 		resumeButton = new TextButton("Resume game", buttonStyle);
 		resumeButton.pad(5);

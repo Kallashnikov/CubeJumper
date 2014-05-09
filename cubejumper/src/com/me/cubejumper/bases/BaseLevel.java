@@ -62,7 +62,7 @@ public class BaseLevel implements Screen {
 	public static float startTime, endTime;
 	public static float highScore = 0;
 	public static boolean isSlowMotion = false;
-	public static boolean isSuperJump = true;
+	public static boolean isSuperJump = false;
 	
 	protected static CubeJumper game;
 	
@@ -97,7 +97,7 @@ public class BaseLevel implements Screen {
 	public void show() {
 		width = Gdx.graphics.getWidth() / 5;
 		height = Gdx.graphics.getHeight() / 5;
-
+		
 		isSlowMotion = false;
 		isSuperJump = false;
 		BasePowerUp.count = 0;
@@ -198,6 +198,12 @@ public class BaseLevel implements Screen {
 		camera.update();
 
 		debugRenderer.render(world, camera.combined);
+	}
+	
+	public static void resetPowerUps() {
+		isSlowMotion = false;
+		isSuperJump = false;
+		BasePowerUp.count = 0;
 	}
 
 	@Override
