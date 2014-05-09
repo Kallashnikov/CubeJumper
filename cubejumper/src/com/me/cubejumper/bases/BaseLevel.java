@@ -51,6 +51,10 @@ import com.me.cubejumper.screens.PauseScreen;
  * @author Jacob
  */
 public class BaseLevel implements Screen {
+	protected static final float TIMESTEP = 1 / 60f;
+	protected static final int VELOCITYIT = 8;
+	protected static final int POSITIONIT = 3;
+
 	private float currentBgx;
 	private long lastTimeBg;
 	
