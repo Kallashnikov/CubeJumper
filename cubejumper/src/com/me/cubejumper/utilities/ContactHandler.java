@@ -1,4 +1,4 @@
-package com.me.cubejumper;
+package com.me.cubejumper.utilities;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.Player;
 import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.levels.PlayScreen;
 import com.me.cubejumper.screens.DeathScreen;

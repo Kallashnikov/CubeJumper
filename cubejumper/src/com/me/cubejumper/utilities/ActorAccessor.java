@@ -1,4 +1,4 @@
-package com.me.cubejumper;
+package com.me.cubejumper.utilities;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 

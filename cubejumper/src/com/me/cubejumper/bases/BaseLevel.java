@@ -1,5 +1,7 @@
 package com.me.cubejumper.bases;
 
+import aurelienribon.bodyeditor.BodyEditorLoader;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -9,12 +11,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.PolygonRegion;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.EarClippingTriangulator;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -27,12 +35,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.me.cubejumper.ContactHandler;
 import com.me.cubejumper.CubeJumper;
-import com.me.cubejumper.InputHandler;
 import com.me.cubejumper.Player;
 import com.me.cubejumper.levels.Level1;
 import com.me.cubejumper.screens.PauseScreen;
+import com.me.cubejumper.utilities.ContactHandler;
+import com.me.cubejumper.utilities.InputHandler;
 
 /**
  * Basis for all level classes, it contains:
@@ -78,6 +86,7 @@ public class BaseLevel implements Screen {
 	private Body groundBody;
 	private BodyDef groundBodyDef;
 	private PolygonShape groundBox;
+	private Fixture fix;
 	
 	protected SpriteBatch batch;
 	protected ButtonStyle buttonStyle;
@@ -85,6 +94,7 @@ public class BaseLevel implements Screen {
 	protected Stage stage;
 	protected TextureAtlas atlas;
 	protected Texture background;
+	protected Sprite bg;
 	protected Skin skin;
 	protected Table table;
 	protected LabelStyle headingStyle;
@@ -103,6 +113,7 @@ public class BaseLevel implements Screen {
 		
 		batch = new SpriteBatch();
 		background = new Texture(Gdx.files.internal("ui/background.png"));
+		bg = new Sprite(background);
 		atlas = new TextureAtlas("ui/pausebutton.pack");
 		
 		currentBgx = 800;
@@ -164,7 +175,7 @@ public class BaseLevel implements Screen {
 
 		groundBox = new PolygonShape();
 		groundBox.setAsBox((camera.viewportWidth) * 100, .5f);
-
+		
 		groundBody.createFixture(groundBox, 0.0f);
 	}
 
@@ -189,8 +200,8 @@ public class BaseLevel implements Screen {
 		
 		batch.begin();
 		stage.draw();
-		batch.draw(background, currentBgx - 800, 0);
-		batch.draw(background, currentBgx, 0);
+		batch.draw(bg, currentBgx - 800, 0);
+		batch.draw(bg, currentBgx, 0);
 		batch.end();
 		
 		player.update(camera, delta);

@@ -8,6 +8,8 @@ import com.me.cubejumper.objects.Cubes;
 import com.me.cubejumper.objects.Spikes;
 import com.me.cubejumper.objects.powerups.PUSloMo;
 import com.me.cubejumper.objects.powerups.PUSuperJump;
+
+import box2dLight.ConeLight;
 import box2dLight.RayHandler;
 
 /**
@@ -42,7 +44,7 @@ public class Level1 extends BaseLevel
 		sloMo = new PUSloMo(world, 75, 37.5f);
 		spJump = new PUSuperJump(world, 25, 10);
 		
-//		ConeLight light = new ConeLight(handler, 200, Color.BLUE, 1000, 20, 20, 30, 90);
+//		ConeLight light = new ConeLight(handler, 500, Color.WHITE, 500, 20, 50, 270, 60);
 //		light.setSoft(true);
 //		light.setSoftnessLength(100f);
 		
@@ -52,6 +54,9 @@ public class Level1 extends BaseLevel
 		genSpikes(6, 130, 1.5f, 4);
 		genCubes(4, 180, 11.7f, 3);
 		genSpikes(9, 160, 21.7f, 6);
+		genCubes(5, 250, 1.5f, 4);
+		genSpikes(11, 220, 1.5f, 9);
+		genCubes(10, 270, 11.5f, 5);
 	}
 	
 	/**
@@ -97,8 +102,6 @@ public class Level1 extends BaseLevel
 			Player.yLimit = 55;
 			PUSuperJump.count = 0;
 		}
-		
-		//System.out.println(100 >> 1);
 		
 		sloMo.color(75, 37.5f, Color.BLUE, camera);
 		spJump.color(25, 10, Color.ORANGE, camera);
