@@ -1,14 +1,17 @@
 package com.me.cubejumper.levels;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
 import com.me.cubejumper.bases.BaseLevel;
-import com.me.cubejumper.objects.Cubes;
-import com.me.cubejumper.objects.Spikes;
 import com.me.cubejumper.objects.powerups.PUSloMo;
 import com.me.cubejumper.objects.powerups.PUSuperJump;
+import com.me.cubejumper.utilities.ActorAccessor;
 
+import aurelienribon.tweenengine.Timeline;
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenManager;
 import box2dLight.ConeLight;
 import box2dLight.RayHandler;
 
@@ -19,14 +22,12 @@ import box2dLight.RayHandler;
  */
 public class Level1 extends BaseLevel
 {
-	private static final int TEN = 10;
-	
-	private Spikes[] spikeArray = new Spikes[100];
-	private Cubes[] cubeArray = new Cubes[100];
 	private PUSloMo sloMo;
 	private PUSuperJump spJump;
 	
 	private RayHandler handler;
+	private static ConeLight light;
+	private TweenManager tween;
 	
 	public Level1(CubeJumper game) {
 		BaseLevel.game = game;
@@ -39,14 +40,17 @@ public class Level1 extends BaseLevel
 	public void show() {
 		super.show();
 		
+		tween = new TweenManager();
+		Tween.registerAccessor(Actor.class, new ActorAccessor());
+		
 		handler = new RayHandler(world);
 		
 		sloMo = new PUSloMo(world, 75, 37.5f);
 		spJump = new PUSuperJump(world, 25, 10);
 		
-//		ConeLight light = new ConeLight(handler, 500, Color.WHITE, 500, 20, 50, 270, 60);
-//		light.setSoft(true);
-//		light.setSoftnessLength(100f);
+		light = new ConeLight(handler, 500, Color.WHITE, 500, 0, 0, 270, 60);
+		light.setSoft(true);
+		light.setSoftnessLength(100f);
 		
 		genCubes(2, 50, 1.5f, 0);
 		genCubes(3, 50, 11.5f, 2);
@@ -55,36 +59,8 @@ public class Level1 extends BaseLevel
 		genCubes(4, 180, 11.7f, 3);
 		genSpikes(9, 160, 21.7f, 6);
 		genCubes(5, 250, 1.5f, 4);
-		genSpikes(11, 220, 1.5f, 9);
-		genCubes(10, 270, 11.5f, 5);
-	}
-	
-	/**
-	 * @param times - number of times the loop will run
-	 * @param offset - start position in the world
-	 * @param y - height position
-	 * @param pos - position in the array to start the loop <p>
-	 * 
-	 * @author Jacob
-	 */
-	public void genSpikes(int times, int offset, float y, int pos){
-		for(int x = 0 + pos; x < times; x++){
-			spikeArray[x] = new Spikes(world, (x * TEN) + offset, y);
-		}
-	}
-	
-	/**
-	 * @param times - number of times the loop will run
-	 * @param offset - start position in the world
-	 * @param y - height position
-	 * @param pos - position in the array to start the loop <p>
-	 * 
-	 * @author Jacob
-	 */
-	public void genCubes(int times, int offset, float y, int pos){
-		for(int x = 0 + pos; x < times; x++){
-			cubeArray[x] = new Cubes(world, (x * TEN) + offset, y);
-		}
+		genSpikes(12, 210, 1.5f, 9);
+		genCubes(10, 280, 11.5f, 5);
 	}
 	
 	public void render(float delta) {
@@ -103,11 +79,21 @@ public class Level1 extends BaseLevel
 			PUSuperJump.count = 0;
 		}
 		
+		light.setPosition(player.getPosition().x, ((int)player.getPosition().y) + 50);
+		
 		sloMo.color(75, 37.5f, Color.BLUE, camera);
 		spJump.color(25, 10, Color.ORANGE, camera);
 		
-//		handler.setCombinedMatrix(camera.combined);
-//		handler.updateAndRender();
+		handler.updateAndRender();
+		handler.setCombinedMatrix(camera.combined);
+	}
+	
+	public static Color getLightColor() {
+		return	light.getColor();
+	}
+	
+	public static void setLightColor(Color color) {
+		light.setColor(color);
 	}
 	
 	public void resize(int width, int height) {
@@ -124,15 +110,14 @@ public class Level1 extends BaseLevel
 
 	public void resume() {
 		super.resume();
+		
+		game.setScreen(new Level1(game));
 	}
 
 	public void dispose() {
 		super.dispose();
 		
 		handler.dispose();
-		for(int x = 0; x < 100; x++) {
-			spikeArray[x].dispose();
-		}
 	}
 
 }

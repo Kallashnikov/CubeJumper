@@ -16,12 +16,7 @@ import com.me.cubejumper.utilities.ActorAccessor;
 
 public class PauseScreen extends BaseScreen
 {
-	public static Vector2 playerPos;
-	public static Vector2 playerXYVel;
-	public static float playerRot;
-	public static boolean pausedCanJump;
-	
-	Level1 level;
+	private Level1 level;
 	
 	private TextButton resumeButton;
 	

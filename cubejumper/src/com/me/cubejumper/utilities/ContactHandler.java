@@ -1,5 +1,6 @@
 package com.me.cubejumper.utilities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
 import com.me.cubejumper.bases.BaseLevel;
+import com.me.cubejumper.levels.Level1;
 import com.me.cubejumper.levels.PlayScreen;
 import com.me.cubejumper.screens.DeathScreen;
 
@@ -48,9 +50,11 @@ public class ContactHandler implements ContactListener
 		}else if((returnData(a, 1) && returnData(b, 5))
 				|| (returnData(a, 5) && returnData(b, 1))){
 			BaseLevel.isSlowMotion = true;
+			Level1.setLightColor(Color.BLUE);
 		}else if((returnData(a, 1) && returnData(b, 6))
 				|| (returnData(a, 6) && returnData(b, 1))){
 			BaseLevel.isSuperJump = true;
+			Level1.setLightColor(Color.ORANGE);
 		}
 	}
 	

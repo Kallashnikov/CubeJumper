@@ -152,11 +152,21 @@ public class Player
 		return body.getAngularVelocity();
 	}
 
-	public static boolean isCanJump() {
-		return canJump;
+	public static int isCanJump() {
+		int num;
+		if(canJump){
+			num = 1;
+		}else{
+			num = 0;
+		}
+		return num;
 	}
 
-	public static void setCanJump(boolean canJump) {
-		Player.canJump = canJump;
+	public static void setCanJump(int canJump) {
+		if(canJump == 1){
+			Player.canJump = true;
+		}else{
+			Player.canJump = false;
+		}
 	}
 }

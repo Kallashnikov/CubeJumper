@@ -1,7 +1,10 @@
 package com.me.cubejumper.bases;
 
-import aurelienribon.bodyeditor.BodyEditorLoader;
-
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -11,18 +14,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.PolygonRegion;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.EarClippingTriangulator;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -37,7 +35,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
-import com.me.cubejumper.levels.Level1;
+import com.me.cubejumper.objects.Cubes;
+import com.me.cubejumper.objects.Spikes;
 import com.me.cubejumper.screens.PauseScreen;
 import com.me.cubejumper.utilities.ContactHandler;
 import com.me.cubejumper.utilities.InputHandler;
@@ -60,7 +59,8 @@ public class BaseLevel implements Screen {
 	protected static final float TIMESTEP = 1 / 60f;
 	protected static final int VELOCITYIT = 8;
 	protected static final int POSITIONIT = 3;
-
+	private static final int TEN = 10;
+	
 	private float currentBgx;
 	private long lastTimeBg;
 	
@@ -70,10 +70,13 @@ public class BaseLevel implements Screen {
 	public static boolean isPaused = false;
 	public static boolean isSlowMotion = false;
 	public static boolean isSuperJump = false;
+	public static boolean playing = true;
+	private Spikes[] spikeArray = new Spikes[100];
+	private Cubes[] cubeArray = new Cubes[100];
 	
 	protected static CubeJumper game;
 	
-	private Player player;
+	protected Player player;
 	private ContactHandler conHandler;
 	private InputHandler inputHandler;
 	
@@ -86,7 +89,6 @@ public class BaseLevel implements Screen {
 	private Body groundBody;
 	private BodyDef groundBodyDef;
 	private PolygonShape groundBox;
-	private Fixture fix;
 	
 	protected SpriteBatch batch;
 	protected ButtonStyle buttonStyle;
@@ -209,6 +211,34 @@ public class BaseLevel implements Screen {
 
 		debugRenderer.render(world, camera.combined);
 	}
+	
+	/**
+	 * @param times - number of times the loop will run
+	 * @param offset - start position in the world
+	 * @param y - height position
+	 * @param pos - position in the array to start the loop <p>
+	 * 
+	 * @author Jacob
+	 */
+	public void genSpikes(int times, int offset, float y, int pos){
+		for(int x = 0 + pos; x < times; x++){
+			spikeArray[x] = new Spikes(world, (x * TEN) + offset, y);
+		}
+	}
+	
+	/**
+	 * @param times - number of times the loop will run
+	 * @param offset - start position in the world
+	 * @param y - height position
+	 * @param pos - position in the array to start the loop <p>
+	 * 
+	 * @author Jacob
+	 */
+	public void genCubes(int times, int offset, float y, int pos){
+		for(int x = 0 + pos; x < times; x++){
+			cubeArray[x] = new Cubes(world, (x * TEN) + offset, y);
+		}
+	}
 
 	@Override
 	public void resize(int width, int height) {
@@ -220,19 +250,44 @@ public class BaseLevel implements Screen {
 
 	@Override
 	public void pause() {
-		PauseScreen.playerPos = player.getPosition();
-		PauseScreen.playerXYVel = player.getVelocity();
-		PauseScreen.playerRot = player.getAngVelocity();
-		PauseScreen.pausedCanJump = Player.isCanJump();
+		try {
+			FileWriter file1 = new FileWriter("position.txt");
+				file1.write(player.getPosition().toString());
+				file1.close();
+			FileWriter file2 = new FileWriter("velocity.txt");
+				file2.write(player.getVelocity().toString());
+				file2.close();
+			FileWriter file3 = new FileWriter("angvelocity.txt");
+				file3.write((int)player.getAngVelocity());
+				file3.close();
+			FileWriter file4 = new FileWriter("canjump.txt");
+				file4.write(Player.isCanJump());
+				file4.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+//		SaveData.playerPos = player.getPosition();
+//		SaveData.playerXYVel = player.getVelocity();
+//		SaveData.playerRot = player.getAngVelocity();
+//		SaveData.pausedCanJump = Player.isCanJump();
 		game.setScreen(new PauseScreen(game));
 	}
 
 	public void resume() {
-		//player.setPositionAndAngVelocity(PauseScreen.playerPos, PauseScreen.playerRot);
-		//player.setVelocity(PauseScreen.playerXYVel);
-		//Player.setCanJump(PauseScreen.pausedCanJump);
-		
-		game.setScreen(new Level1(game));
+		try {
+			FileReader read1 = new FileReader("position.txt");
+			BufferedReader br = new BufferedReader(read1);
+			//while(player.setPositionAndAngVelocity() = br.readLine() != null);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		player.setPositionAndAngVelocity(SaveData.playerPos, SaveData.playerRot);
+//		player.setVelocity(SaveData.playerXYVel);
+//		Player.setCanJump(SaveData.pausedCanJump);
 	}
 
 	@Override
@@ -240,6 +295,9 @@ public class BaseLevel implements Screen {
 		groundBox.dispose();
 		debugRenderer.dispose();
 		world.dispose();
+		for(int x = 0; x < 100; x++) {
+			spikeArray[x].dispose();
+		}
 	}
 
 }
