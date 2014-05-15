@@ -9,9 +9,6 @@ import com.me.cubejumper.objects.powerups.PUSloMo;
 import com.me.cubejumper.objects.powerups.PUSuperJump;
 import com.me.cubejumper.utilities.ActorAccessor;
 
-import aurelienribon.tweenengine.Timeline;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenManager;
 import box2dLight.ConeLight;
 import box2dLight.RayHandler;
 
@@ -27,7 +24,6 @@ public class Level1 extends BaseLevel
 	
 	private RayHandler handler;
 	private static ConeLight light;
-	private TweenManager tween;
 	
 	public Level1(CubeJumper game) {
 		BaseLevel.game = game;
@@ -40,14 +36,12 @@ public class Level1 extends BaseLevel
 	public void show() {
 		super.show();
 		
-		tween = new TweenManager();
-		Tween.registerAccessor(Actor.class, new ActorAccessor());
-		
 		handler = new RayHandler(world);
 		
 		sloMo = new PUSloMo(world, 75, 37.5f);
 		spJump = new PUSuperJump(world, 25, 10);
 		
+
 		light = new ConeLight(handler, 500, Color.WHITE, 500, 0, 0, 270, 60);
 		light.setSoft(true);
 		light.setSoftnessLength(100f);
