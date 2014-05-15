@@ -1,5 +1,7 @@
 package com.me.cubejumper.bases;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import com.badlogic.gdx.Gdx;
@@ -215,6 +217,23 @@ public class BaseLevel implements Screen {
 
 	@Override
 	public void pause() {
+		try {
+			FileWriter file1 = new FileWriter("position.txt");
+				file1.write(player.getPosition().toString());
+				file1.close();
+			FileWriter file2 = new FileWriter("velocity.txt");
+				file2.write(player.getVelocity().toString());
+				file2.close();
+			FileWriter file3 = new FileWriter("angvelocity.txt");
+				file3.write((int)player.getAngVelocity());
+				file3.close();
+			FileWriter file4 = new FileWriter("canjump.txt");
+				file4.write(Player.isCanJump());
+				file4.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import com.me.cubejumper.PowerUpSloMo;
 import com.me.cubejumper.Spikes;
 import com.me.cubejumper.bases.BaseLevel;
 
+import box2dLight.ConeLight;
 import box2dLight.RayHandler;
 
 /**
@@ -34,9 +35,9 @@ public class Level1 extends BaseLevel
 		
 		slomo = new PowerUpSloMo(world, 10, 7f);
 		
-//		ConeLight light = new ConeLight(handler, 200, Color.BLUE, 1000, 20, 20, 30, 90);
-//		light.setSoft(true);
-//		light.setSoftnessLength(100f);
+		ConeLight light = new ConeLight(handler, 200, Color.BLUE, 1000, 20, 20, 30, 90);
+		light.setSoft(true);
+		light.setSoftnessLength(100f);
 		
 		genCubes(2, 50, 1.5f, 0);
 		genCubes(3, 50, 11.5f, 2);
@@ -76,8 +77,8 @@ public class Level1 extends BaseLevel
 	public void render(float delta) {
 		super.render(delta);
 		
-//		handler.setCombinedMatrix(camera.combined);
-//		handler.updateAndRender();
+		handler.setCombinedMatrix(camera.combined);
+		handler.updateAndRender();
 	}
 	
 	public void resize(int width, int height) {

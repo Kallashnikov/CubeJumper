@@ -228,4 +228,42 @@ public class Player implements InputProcessor
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public Vector2 getPosition() {
+		return body.getPosition();
+	}
+
+	public void setPositionAndAngVelocity(Vector2 position, float playerAngVel) {
+		this.body.setTransform(position, playerAngVel);
+	}
+
+	public Vector2 getVelocity() {
+		return body.getLinearVelocity();
+	}
+
+	public void setVelocity(Vector2 velocity) {
+		this.body.setLinearVelocity(velocity);
+	}
+
+	public float getAngVelocity() {
+		return body.getAngularVelocity();
+	}
+
+	public static int isCanJump() {
+		int num;
+		if(canJump){
+			num = 1;
+		}else{
+			num = 0;
+		}
+		return num;
+	}
+
+	public static void setCanJump(int canJump) {
+		if(canJump == 1){
+			Player.canJump = true;
+		}else{
+			Player.canJump = false;
+		}
+	}
 }
