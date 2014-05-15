@@ -8,6 +8,7 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -251,9 +252,9 @@ public class BaseLevel implements Screen {
 	@Override
 	public void pause() {
 		try {
-			FileWriter file1 = new FileWriter("position.txt");
-				file1.write(player.getPosition().toString());
-				file1.close();
+			FileHandle file1 = new FileHandle("position.txt");
+				file1.writeBytes(new byte[] {}, false);
+				
 			FileWriter file2 = new FileWriter("velocity.txt");
 				file2.write(player.getVelocity().toString());
 				file2.close();
