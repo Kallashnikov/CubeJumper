@@ -2,30 +2,16 @@ package com.me.cubejumper.screens;
 
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenManager;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.me.cubejumper.ActorAccessor;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.bases.BaseScreen;
 import com.me.cubejumper.levels.Level1;
 import com.me.cubejumper.levels.PlayScreen;
+import com.me.cubejumper.utilities.ActorAccessor;
 
 /** 
  * On the player's death(i.e. makes contact with a spike), this screen
@@ -35,8 +21,6 @@ import com.me.cubejumper.levels.PlayScreen;
  */
 public class DeathScreen extends BaseScreen
 {
-	private Level1 level1;
-
 	private TextButton buttonRestart;
 	private Label time;
 	

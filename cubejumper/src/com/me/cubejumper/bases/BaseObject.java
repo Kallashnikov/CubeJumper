@@ -1,6 +1,7 @@
 package com.me.cubejumper.bases;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -28,6 +29,7 @@ public class BaseObject
 	protected FixtureDef fixDef;
 	protected PolygonShape poly;
 	protected CircleShape circle;
+	protected ShapeRenderer shapeRender;
 	
 	/**
 	 * X, y are in increments of 10

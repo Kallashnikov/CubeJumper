@@ -1,8 +1,6 @@
 package com.me.cubejumper;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
@@ -12,17 +10,16 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
-import com.me.cubejumper.bases.BaseLevel;
-import com.me.cubejumper.levels.PlayScreen;
 
 /**
  * Controls movement, updating, rotation, and the player body.
  * 
  * @param Vector2 movement<p>
- * @param speed (float)
+ * @param speed (float) - 50
  * @param canJump (boolean) - can the player jump
- * @param xLimit (int) - limits x velocity
- * @param yLimit (int) - limits y velocity
+ * @param xLimit (int) - limits x velocity, 60
+ * @param yLimit (int) - limits y velocity, 55
+ * @param angVel (float) - limits angular velocity, 5.89f
  * @param available (boolean) - checks if there is an Accelerometer
  * @param currX (float)
  * @param currY	(float)
@@ -34,31 +31,25 @@ import com.me.cubejumper.levels.PlayScreen;
  * 
  * @author Jacob
  */
-public class Player implements InputProcessor
+public class Player
 {
-	private int width = Gdx.graphics.getWidth() / 5;
-	private int height = Gdx.graphics.getHeight() / 5;
-	private Vector2 movement = new Vector2(0, 0);
-	private float speed = 50;
+	public Vector2 movement = new Vector2(0, 0);
+	public static float speed = 50;
 	public static boolean canJump = true;
 	public static int xLimit = 60, yLimit = 55;
+	public static float angVel = -5.89f;
+	public static int superJump = 1;
 	
 	public boolean available = Gdx.input.isPeripheralAvailable(Peripheral.Accelerometer);
 	public float currX, currY, currZ;
 	public float posX, posY, posZ;
-	private boolean isDevMode = false;
-	
-	private PlayScreen play;
-	
-	private World world;
+	public boolean isDevMode = false;
 	
 	private BodyDef playerDef;
 	private FixtureDef fixDef;
 	private Body body;
 	
 	public Player(World world) {
-		this.world = world;
-		
 		//Body definition
 		playerDef = new BodyDef();
 		playerDef.type = BodyType.DynamicBody;
@@ -79,17 +70,17 @@ public class Player implements InputProcessor
 		body.setUserData(1);
 		body.createFixture(fixDef);
 		
-		posX = Gdx.input.getAccelerometerX();
-		posY = Gdx.input.getAccelerometerY();
-		posZ = Gdx.input.getAccelerometerZ();
+//		posX = Gdx.input.getAccelerometerX();
+//		posY = Gdx.input.getAccelerometerY();
+//		posZ = Gdx.input.getAccelerometerZ();
 	}
 	
 	public void update(Camera camera, float delta) {	
-		body.applyForceToCenter(movement, true);
+		//body.applyForceToCenter(movement, true);
 		
 		camera.position.set(body.getPosition().x, body.getPosition().y, 0);
-		//System.out.println(canJump);
 		
+		/*
 		currX = Gdx.input.getAccelerometerX();
 		currY = Gdx.input.getAccelerometerY();
 		currZ = Gdx.input.getAccelerometerZ();
@@ -105,6 +96,8 @@ public class Player implements InputProcessor
 				movement.x = 0;
 			}
 		}
+		**/
+
 		
 		//limits the acceleration of the body
 		//to prevent it from traveling infinitely faster
@@ -114,6 +107,8 @@ public class Player implements InputProcessor
 			}else{
 				body.setLinearVelocity(xLimit, body.getLinearVelocity().y);
 			}
+		}else if(body.getLinearVelocity().x <= -1) {
+			body.setLinearVelocity(-1, body.getLinearVelocity().y);
 		}else if(body.getLinearVelocity().y > yLimit) {
 			if(body.getLinearVelocity().x > xLimit) {
 				body.setLinearVelocity(xLimit, yLimit);
@@ -124,127 +119,35 @@ public class Player implements InputProcessor
 			body.setLinearVelocity(body.getLinearVelocity());
 		}
 		
-		if(body.getAngularVelocity() < -5.89f) {
-			body.setAngularVelocity(-5.89f);
+		if(body.getAngularVelocity() < angVel) {
+			body.setAngularVelocity(angVel);
 		}else{
 			body.setAngularVelocity(body.getAngularVelocity());
 		}
 	}
 	
 	public void jump() {
-		float impulse = body.getMass() * 65;
+		float impulse = body.getMass() * 65 * superJump;
 		body.applyLinearImpulse(new Vector2(0, impulse), body.getWorldCenter(), true);
 		body.applyAngularImpulse(-7300, true);
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		switch(keycode) {
-		case Keys.W:
-			if(isDevMode) {
-				world.setGravity(new Vector2(0, 0));
-				jump();
-			}else if(canJump) {
-				jump();
-			}
-			break;
-		case Keys.A:
-			movement.x = -speed;
-			break;
-		case Keys.S:
-			isDevMode = true;
-			BaseLevel.isSlowMotion = true;
-			break;
-		case Keys.D: 
-			movement.x = speed;
-			break;
-		default:
-			break;
-		}
-		return true;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		switch(keycode) {
-		case Keys.W:
-			if(isDevMode){
-				canJump = false;
-			}else
-				canJump = false;
-			break;
-		case Keys.A:
-			movement.x = 0;
-			break;
-		case Keys.S:
-			isDevMode = false;
-			BaseLevel.isSlowMotion = false;
-			break;
-		case Keys.D:
-			movement.x = 0;
-			break;
-		default:
-			break;
-		}
-		return true;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer,
-			int button) {
-		if(canJump) {
-			jump();
-		}
-		return true;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer,
-			int button) {
-		canJump = false;
-		return true;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 	
 	public Vector2 getPosition() {
 		return body.getPosition();
 	}
-
+	
 	public void setPositionAndAngVelocity(Vector2 position, float playerAngVel) {
 		this.body.setTransform(position, playerAngVel);
 	}
-
+	
 	public Vector2 getVelocity() {
 		return body.getLinearVelocity();
 	}
-
+	
 	public void setVelocity(Vector2 velocity) {
 		this.body.setLinearVelocity(velocity);
 	}
-
+	
 	public float getAngVelocity() {
 		return body.getAngularVelocity();
 	}

@@ -7,10 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.me.cubejumper.ActorAccessor;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.bases.BaseScreen;
 import com.me.cubejumper.levels.Level1;
+import com.me.cubejumper.utilities.ActorAccessor;
 
 /**
  * Creates a menu, with the title, and 2 buttons for starting the game and exiting.

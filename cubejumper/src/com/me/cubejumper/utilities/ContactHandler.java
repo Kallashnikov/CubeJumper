@@ -1,11 +1,16 @@
-package com.me.cubejumper;
+package com.me.cubejumper.utilities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import com.me.cubejumper.CubeJumper;
+import com.me.cubejumper.Player;
+import com.me.cubejumper.bases.BaseLevel;
+import com.me.cubejumper.levels.Level1;
 import com.me.cubejumper.levels.PlayScreen;
 import com.me.cubejumper.screens.DeathScreen;
 
@@ -17,18 +22,14 @@ import com.me.cubejumper.screens.DeathScreen;
 public class ContactHandler implements ContactListener
 {
 	private CubeJumper game;
-	private PlayScreen play;
-	
-	private World world;
 	
 	public ContactHandler(CubeJumper game, World world) {
 		this.game = game;
-		this.world = world;
 	}
 	
 	@Override
 	public void beginContact(Contact contact) {
-		//0 = ground, 1 = player, 2 = spikes, 3 = dynamic spikes, 4 = cubes
+		//0 = ground, 1 = player, 2 = spikes, 3 = dynamic spikes, 4 = cubes, 5 = powerups
 		Fixture a = contact.getFixtureA();
 		Fixture b = contact.getFixtureB();
 		
@@ -48,8 +49,12 @@ public class ContactHandler implements ContactListener
 			Player.canJump = true;
 		}else if((returnData(a, 1) && returnData(b, 5))
 				|| (returnData(a, 5) && returnData(b, 1))){
-			System.out.println("Player has touched a power up!");
-			//world.step(timeStep, velocityIterations, positionIterations)
+			BaseLevel.isSlowMotion = true;
+			Level1.setLightColor(Color.BLUE);
+		}else if((returnData(a, 1) && returnData(b, 6))
+				|| (returnData(a, 6) && returnData(b, 1))){
+			BaseLevel.isSuperJump = true;
+			Level1.setLightColor(Color.ORANGE);
 		}
 	}
 	
@@ -59,19 +64,13 @@ public class ContactHandler implements ContactListener
 
 	@Override
 	public void endContact(Contact contact) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-		// TODO Auto-generated method stub
-		
 	}
 }
