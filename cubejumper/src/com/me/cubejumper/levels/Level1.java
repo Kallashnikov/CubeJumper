@@ -1,14 +1,14 @@
 package com.me.cubejumper.levels;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.math.Vector2;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
 import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.objects.powerups.PUSloMo;
 import com.me.cubejumper.objects.powerups.PUSuperJump;
-import com.me.cubejumper.utilities.ActorAccessor;
-
 import box2dLight.ConeLight;
 import box2dLight.RayHandler;
 
@@ -41,7 +41,6 @@ public class Level1 extends BaseLevel
 		sloMo = new PUSloMo(world, 75, 37.5f);
 		spJump = new PUSuperJump(world, 25, 10);
 		
-
 		light = new ConeLight(handler, 500, Color.WHITE, 500, 0, 0, 270, 60);
 		light.setSoft(true);
 		light.setSoftnessLength(100f);
@@ -80,6 +79,7 @@ public class Level1 extends BaseLevel
 		
 		handler.updateAndRender();
 		handler.setCombinedMatrix(camera.combined);
+		handler.setAmbientLight(.1f);
 	}
 	
 	public static Color getLightColor() {
@@ -104,8 +104,6 @@ public class Level1 extends BaseLevel
 
 	public void resume() {
 		super.resume();
-		
-		game.setScreen(new Level1(game));
 	}
 
 	public void dispose() {
@@ -113,5 +111,4 @@ public class Level1 extends BaseLevel
 		
 		handler.dispose();
 	}
-
 }

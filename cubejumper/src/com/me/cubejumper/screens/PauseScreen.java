@@ -52,8 +52,8 @@ public class PauseScreen extends BaseScreen
 		stage.addActor(table);
 		
 		//The table fade in Tween
-		Tween.from(table, ActorAccessor.ALPHA, 1f).target(0).start(tween);
-		Tween.from(table, ActorAccessor.Y, .75f).target(Gdx.graphics.getHeight() / 8).start(tween);
+		Tween.from(table, ActorAccessor.ALPHA, 3.5f).target(0).start(tween);
+//		Tween.from(table, ActorAccessor.Y, .75f).target(Gdx.graphics.getHeight() / 8).start(tween);
 		
 		//The Heading fade in
 		Timeline.createSequence().beginSequence()

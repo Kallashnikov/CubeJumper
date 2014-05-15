@@ -137,7 +137,8 @@ public class Player
 	}
 	
 	public void setPositionAndAngVelocity(Vector2 position, float playerAngVel) {
-		this.body.setTransform(position, playerAngVel);
+		body.setTransform(position, playerAngVel);
+		body.setAngularVelocity(playerAngVel);
 	}
 	
 	public Vector2 getVelocity() {
@@ -148,22 +149,23 @@ public class Player
 		this.body.setLinearVelocity(velocity);
 	}
 	
-	public float getAngVelocity() {
-		return body.getAngularVelocity();
+	public String getAngVelocity() {
+		String flo = Float.toString(body.getAngularVelocity());
+		return flo;
 	}
 
-	public static int isCanJump() {
-		int num;
+	public static String isCanJump() {
+		String num;
 		if(canJump){
-			num = 1;
+			num = "true";
 		}else{
-			num = 0;
+			num = "false";
 		}
 		return num;
 	}
 
-	public static void setCanJump(int canJump) {
-		if(canJump == 1){
+	public static void setCanJump(String canJump) {
+		if(canJump.equals("true")){
 			Player.canJump = true;
 		}else{
 			Player.canJump = false;

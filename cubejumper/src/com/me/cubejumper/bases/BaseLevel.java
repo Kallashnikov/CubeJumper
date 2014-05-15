@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -251,24 +253,18 @@ public class BaseLevel implements Screen {
 
 	@Override
 	public void pause() {
-		try {
-			FileHandle file1 = new FileHandle("position.txt");
-				file1.writeBytes(new byte[] {}, false);
-				
-			FileWriter file2 = new FileWriter("velocity.txt");
-				file2.write(player.getVelocity().toString());
-				file2.close();
-			FileWriter file3 = new FileWriter("angvelocity.txt");
-				file3.write((int)player.getAngVelocity());
-				file3.close();
-			FileWriter file4 = new FileWriter("canjump.txt");
-				file4.write(Player.isCanJump());
-				file4.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		FileHandle file1 = Gdx.files.local("positionx.txt");
+			file1.writeString(Float.toString(player.getPosition().x), false);
+		FileHandle file2 = Gdx.files.local("positiony.txt");
+			file2.writeString(Float.toString(player.getPosition().y), false);
+		FileHandle file3 = Gdx.files.local("velocityx.txt");
+			file3.writeString(Float.toString(player.getVelocity().x), false);
+		FileHandle file4 = Gdx.files.local("velocityy.txt");
+			file4.writeString(Float.toString(player.getVelocity().y), false);
+		FileHandle file5 = Gdx.files.local("angvelocity.txt");
+			file5.writeString(player.getAngVelocity(), false);
+		FileHandle file6 = Gdx.files.local("canjump.txt");
+			file6.writeString(Player.isCanJump(), false);
 		
 //		SaveData.playerPos = player.getPosition();
 //		SaveData.playerXYVel = player.getVelocity();
@@ -277,18 +273,30 @@ public class BaseLevel implements Screen {
 		game.setScreen(new PauseScreen(game));
 	}
 
+	@Override
 	public void resume() {
-		try {
-			FileReader read1 = new FileReader("position.txt");
-			BufferedReader br = new BufferedReader(read1);
-			//while(player.setPositionAndAngVelocity() = br.readLine() != null);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		player.setPositionAndAngVelocity(SaveData.playerPos, SaveData.playerRot);
-//		player.setVelocity(SaveData.playerXYVel);
-//		Player.setCanJump(SaveData.pausedCanJump);
+		game.setScreen(this);
+		float x, y;
+		Vector2 vec = new Vector2(0, 0);
+		
+		FileHandle file4 = Gdx.files.internal("velocityx.txt");
+		x = Float.parseFloat(file4.readString());
+		FileHandle file5 = Gdx.files.internal("velocityy.txt");
+		y = Float.parseFloat(file5.readString());
+		vec.set(x, y);
+		player.setVelocity(vec);
+	
+		FileHandle file6 = Gdx.files.internal("canjump.txt");
+		Player.setCanJump(file6.readString());
+	
+		FileHandle file1 = Gdx.files.internal("positionx.txt");
+			x = Float.parseFloat(file1.readString());
+		FileHandle file2 = Gdx.files.internal("positiony.txt");
+			y = Float.parseFloat(file2.readString());
+		vec.set(x, y);
+		FileHandle file3 = Gdx.files.internal("angvelocity.txt");
+			y = Float.parseFloat(file3.readString());
+		player.setPositionAndAngVelocity(vec, y);
 	}
 
 	@Override
