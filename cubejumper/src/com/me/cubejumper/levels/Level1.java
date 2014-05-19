@@ -41,7 +41,7 @@ public class Level1 extends BaseLevel
 		sloMo = new PUSloMo(world, 75, 37.5f);
 		spJump = new PUSuperJump(world, 25, 10);
 		
-		light = new ConeLight(handler, 500, Color.WHITE, 500, 0, 0, 270, 60);
+		light = new ConeLight(handler, 50, Color.WHITE, 500, 0, 0, 270, 60);
 		light.setSoft(true);
 		light.setSoftnessLength(100f);
 		

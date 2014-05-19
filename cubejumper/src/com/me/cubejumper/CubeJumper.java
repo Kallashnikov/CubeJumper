@@ -1,6 +1,7 @@
 package com.me.cubejumper;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Texture;
 import com.me.cubejumper.screens.MainMenu;
 
 /**

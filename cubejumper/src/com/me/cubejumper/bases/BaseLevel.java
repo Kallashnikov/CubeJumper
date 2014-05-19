@@ -279,22 +279,22 @@ public class BaseLevel implements Screen {
 		float x, y;
 		Vector2 vec = new Vector2(0, 0);
 		
-		FileHandle file4 = Gdx.files.internal("velocityx.txt");
+		FileHandle file4 = Gdx.files.local("velocityx.txt");
 		x = Float.parseFloat(file4.readString());
-		FileHandle file5 = Gdx.files.internal("velocityy.txt");
+		FileHandle file5 = Gdx.files.local("velocityy.txt");
 		y = Float.parseFloat(file5.readString());
 		vec.set(x, y);
 		player.setVelocity(vec);
 	
-		FileHandle file6 = Gdx.files.internal("canjump.txt");
+		FileHandle file6 = Gdx.files.local("canjump.txt");
 		Player.setCanJump(file6.readString());
 	
-		FileHandle file1 = Gdx.files.internal("positionx.txt");
+		FileHandle file1 = Gdx.files.local("positionx.txt");
 			x = Float.parseFloat(file1.readString());
-		FileHandle file2 = Gdx.files.internal("positiony.txt");
+		FileHandle file2 = Gdx.files.local("positiony.txt");
 			y = Float.parseFloat(file2.readString());
 		vec.set(x, y);
-		FileHandle file3 = Gdx.files.internal("angvelocity.txt");
+		FileHandle file3 = Gdx.files.local("angvelocity.txt");
 			y = Float.parseFloat(file3.readString());
 		player.setPositionAndAngVelocity(vec, y);
 	}
