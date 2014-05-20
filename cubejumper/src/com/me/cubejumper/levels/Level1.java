@@ -1,12 +1,10 @@
 package com.me.cubejumper.levels;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Vector2;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
 import com.me.cubejumper.bases.BaseLevel;
+import com.me.cubejumper.objects.FinishFlag;
 import com.me.cubejumper.objects.powerups.PUSloMo;
 import com.me.cubejumper.objects.powerups.PUSuperJump;
 import box2dLight.ConeLight;
@@ -21,6 +19,7 @@ public class Level1 extends BaseLevel
 {
 	private PUSloMo sloMo;
 	private PUSuperJump spJump;
+	private FinishFlag flag;
 	
 	private RayHandler handler;
 	private static ConeLight light;
@@ -41,19 +40,37 @@ public class Level1 extends BaseLevel
 		sloMo = new PUSloMo(world, 75, 37.5f);
 		spJump = new PUSuperJump(world, 25, 10);
 		
-		light = new ConeLight(handler, 50, Color.WHITE, 500, 0, 0, 270, 60);
+		light = new ConeLight(handler, 500, Color.WHITE, 500, 0, 0, 270, 60);
 		light.setSoft(true);
 		light.setSoftnessLength(100f);
 		
 		genCubes(2, 50, 1.5f, 0);
 		genCubes(3, 50, 11.5f, 2);
+		
 		genSpikes(4, 100, 1.5f, 0);
 		genSpikes(6, 130, 1.5f, 4);
+		
 		genCubes(4, 180, 11.7f, 3);
+		
 		genSpikes(9, 160, 21.7f, 6);
+		
 		genCubes(5, 250, 1.5f, 4);
+		
 		genSpikes(12, 210, 1.5f, 9);
+		
 		genCubes(10, 280, 11.5f, 5);
+		
+		genSpikes(13, 250, 21.5f, 12);
+		
+		genCubes(12, 310, 21.5f, 10);
+		
+		genSpikes(14, 290, 31.5f, 13);
+		
+		genCubes(14, 350, 21.5f, 12);
+		
+		genSpikes(15, 340, 31.5f, 14);
+		
+		flag = new FinishFlag(world, 500, 1.5f);
 	}
 	
 	public void render(float delta) {

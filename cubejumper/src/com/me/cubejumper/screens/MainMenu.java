@@ -20,7 +20,7 @@ import com.me.cubejumper.utilities.ActorAccessor;
 public class MainMenu extends BaseScreen
 {
 	private Label version;
-	private TextButton buttonPlay, buttonExit;
+	private TextButton buttonPlay, buttonExit, buttonSettings, buttonLevelSelect;
 	
 	public MainMenu(CubeJumper game) {
 		this.game = game;
@@ -31,7 +31,7 @@ public class MainMenu extends BaseScreen
 		super.show();
 		
 		//button instantiation
-		buttonPlay = new TextButton("Play", buttonStyle);
+		buttonPlay = new TextButton("Play", skin);
 		buttonPlay.pad(5);
 		buttonPlay.setColor(1, 1, 1, 0);
 		buttonPlay.addListener(new InputListener() {
@@ -43,7 +43,31 @@ public class MainMenu extends BaseScreen
 			}
 		});
 		
-		buttonExit = new TextButton("EXIT", buttonStyle);
+		buttonSettings = new TextButton("Settings", skin);
+		buttonSettings.pad(5);
+		buttonSettings.setColor(1, 1, 1, 0);
+		buttonSettings.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				Gdx.app.exit();
+				return true;
+			}
+		});
+		
+		buttonLevelSelect = new TextButton("Level Select", skin);
+		buttonLevelSelect.pad(5);
+		buttonLevelSelect.setColor(1, 1, 1, 0);
+		buttonLevelSelect.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				Gdx.app.exit();
+				return true;
+			}
+		});
+		
+		buttonExit = new TextButton("EXIT", skin);
 		buttonExit.pad(5);
 		buttonExit.setColor(1, 1, 1, 0);
 		buttonExit.addListener(new InputListener() {
@@ -55,9 +79,9 @@ public class MainMenu extends BaseScreen
 			}
 		});
 		
-		heading = new Label(CubeJumper.TITLE, headingStyle);
+		heading = new Label(CubeJumper.TITLE, skin);
 		heading.setFontScale(2.5f);
-		version = new Label(CubeJumper.VERSION, headingStyle);
+		version = new Label(CubeJumper.VERSION, skin);
 		version.setFontScale(.5f);
 		
 		table.add(heading);
@@ -65,6 +89,12 @@ public class MainMenu extends BaseScreen
 		table.row();
 		table.add(buttonPlay);
 		table.getCell(buttonPlay).padBottom(10);
+		table.row();
+		table.add(buttonLevelSelect);
+		table.getCell(buttonLevelSelect).padBottom(10);
+		table.row();
+		table.add(buttonSettings);
+		table.getCell(buttonSettings).padBottom(10);
 		table.row();
 		table.add(buttonExit);
 		table.getCell(buttonExit).padLeft(25).padBottom(10);
@@ -91,8 +121,18 @@ public class MainMenu extends BaseScreen
 		
 		Timeline.createParallel().beginParallel()
 			.pushPause(3)
+			.push(Tween.to(buttonLevelSelect, ActorAccessor.ALPHA, .5f).target(1))
+			.push(Tween.to(buttonLevelSelect, ActorAccessor.X, 2f).target(Gdx.graphics.getWidth() / 2.68f)).end().start(tween);
+		
+		Timeline.createParallel().beginParallel()
+			.pushPause(3)
+			.push(Tween.to(buttonSettings, ActorAccessor.ALPHA, .5f).target(1))
+			.push(Tween.to(buttonSettings, ActorAccessor.X, 2f).target(Gdx.graphics.getWidth() / 2.60f)).end().start(tween);
+		
+		Timeline.createParallel().beginParallel()
+			.pushPause(3)
 			.push(Tween.to(buttonExit, ActorAccessor.ALPHA, .5f).target(1))
-			.push(Tween.to(buttonExit, ActorAccessor.X, 2f).target(Gdx.graphics.getWidth() / 2.68f)).end().start(tween);
+			.push(Tween.to(buttonExit, ActorAccessor.X, 2f).target(Gdx.graphics.getWidth() / 2.52f)).end().start(tween);
 		
 		//heading fade in
 		Timeline.createSequence().beginSequence()

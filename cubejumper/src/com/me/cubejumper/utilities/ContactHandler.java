@@ -29,7 +29,7 @@ public class ContactHandler implements ContactListener
 	
 	@Override
 	public void beginContact(Contact contact) {
-		//0 = ground, 1 = player, 2 = spikes, 3 = dynamic spikes, 4 = cubes, 5 = powerups
+		//0 = ground, 1 = player, 2 = spikes, 3 = dynamic spikes, 4 = cubes, 5 = slomo, 6 = super jump, 7 = flag
 		Fixture a = contact.getFixtureA();
 		Fixture b = contact.getFixtureB();
 		

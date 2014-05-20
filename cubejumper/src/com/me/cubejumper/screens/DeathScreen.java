@@ -21,7 +21,7 @@ import com.me.cubejumper.utilities.ActorAccessor;
  */
 public class DeathScreen extends BaseScreen
 {
-	private TextButton buttonRestart;
+	private TextButton buttonRestart, buttonMenu;
 	private Label time;
 	
 	public DeathScreen(CubeJumper game) {
@@ -32,7 +32,7 @@ public class DeathScreen extends BaseScreen
 	public void show() {
 		super.show();
 		
-		buttonRestart = new TextButton("Retry?", buttonStyle);
+		buttonRestart = new TextButton("Retry?", skin);
 		buttonRestart.pad(5);
 		buttonRestart.addListener(new InputListener() {
 			@Override
@@ -43,10 +43,21 @@ public class DeathScreen extends BaseScreen
 			}
 		});
 		
+		buttonMenu = new TextButton("Main Menu", skin);
+		buttonMenu.pad(5);
+		buttonMenu.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				game.setScreen(new MainMenu(game));
+				return true;
+			}
+		});
+		
 		//labels
-		heading = new Label("GAME OVER!", headingStyle);
+		heading = new Label("GAME OVER!", skin);
 		heading.setFontScale(2f);
-		time = new Label("" + PlayScreen.highScore, headingStyle);
+		time = new Label("" + PlayScreen.highScore, skin);
 		time.setFontScale(1.5f);
 		
 		table.add(heading);
@@ -54,6 +65,8 @@ public class DeathScreen extends BaseScreen
 		table.row();
 		table.add(time);
 		table.getCell(time).padBottom(10);
+		table.row();
+		table.add(buttonMenu).padBottom(10);
 		table.row();
 		table.add(buttonRestart);
 		table.debug();

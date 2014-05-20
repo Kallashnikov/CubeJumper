@@ -34,8 +34,6 @@ public class BaseScreen implements Screen
 	protected Skin skin;
 	protected Table table;
 	protected TextButtonStyle buttonStyle;
-	protected LabelStyle headingStyle;
-	protected BitmapFont white, black;
 	protected Label heading;
 	protected SpriteBatch batch;
 	protected TweenManager tween;
@@ -52,26 +50,10 @@ public class BaseScreen implements Screen
 		Gdx.input.setInputProcessor(stage);
 		
 		atlas = new TextureAtlas("ui/bluebutton9.pack");
-		skin = new Skin();
-		skin.addRegions(atlas);
+		skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), atlas);
 		
 		table = new Table(skin);
 		table.setBounds(0, 0, width, height);
-		
-		//font setup
-		white = new BitmapFont(Gdx.files.internal("ui/white.fnt"), false);
-		black = new BitmapFont(Gdx.files.internal("ui/black.fnt"), false);
-		
-		//buttons
-		buttonStyle = new TextButtonStyle();
-		buttonStyle.up = skin.getDrawable("bluebutton");
-		buttonStyle.down = skin.getDrawable("bluebutton_highlighted");
-		buttonStyle.over = skin.getDrawable("bluebutton_highlighted");
-		buttonStyle.pressedOffsetX = 1;
-		buttonStyle.pressedOffsetY = -1;
-		buttonStyle.font = white;
-		
-		headingStyle = new LabelStyle(white, Color.WHITE);
 		
 		//animations
 		tween = new TweenManager();
@@ -119,8 +101,6 @@ public class BaseScreen implements Screen
 		batch.dispose();
 		stage.dispose();
 		atlas.dispose();
-		white.dispose();
-		black.dispose();
 		skin.dispose();
 	}
 

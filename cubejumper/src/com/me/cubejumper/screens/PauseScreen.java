@@ -18,7 +18,7 @@ public class PauseScreen extends BaseScreen
 {
 	private Level1 level;
 	
-	private TextButton resumeButton;
+	private TextButton resumeButton, buttonMenu;
 	
 	public PauseScreen(CubeJumper game){
 		this.game = game;
@@ -29,7 +29,7 @@ public class PauseScreen extends BaseScreen
 		
 		level = new Level1(game);
 		
-		resumeButton = new TextButton("Resume game", buttonStyle);
+		resumeButton = new TextButton("Resume game", skin);
 		resumeButton.pad(5);
 		resumeButton.addListener(new InputListener(){
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -39,12 +39,25 @@ public class PauseScreen extends BaseScreen
 			}
 		});
 		
+		buttonMenu = new TextButton("Main Menu", skin);
+		buttonMenu.pad(5);
+		buttonMenu.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				game.setScreen(new MainMenu(game));
+				return true;
+			}
+		});
+		
 		//The Labels
-		heading = new Label("PAUSED", headingStyle);
+		heading = new Label("PAUSED", skin);
 		heading.setFontScale(2f);
 		
 		table.add(heading);
 		table.getCell(heading).padBottom(10);
+		table.row();
+		table.add(buttonMenu).padBottom(10);
 		table.row();
 		table.add(resumeButton);
 		table.debug();
