@@ -4,62 +4,85 @@ import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.bases.BaseScreen;
-import com.me.cubejumper.levels.Level1;
 import com.me.cubejumper.utilities.ActorAccessor;
 
-public class PauseScreen extends BaseScreen
+public class LevelScreen extends BaseScreen
 {
-	private Level1 level;
+	private TextButton playButton, backButton;
+	private List list;
+	private ScrollPane scrollPane;
 	
-	private TextButton resumeButton, menuButton;
 	
-	public PauseScreen(CubeJumper game){
+	public LevelScreen(CubeJumper game){
 		this.game = game;
 	}
 	
 	public void show(){
 		super.show();
 		
-		level = new Level1(game);
-		
-		resumeButton = new TextButton("Resume game", skin);
-		resumeButton.pad(5);
-		resumeButton.addListener(new InputListener(){
+		playButton = new TextButton("Play", skin);
+		playButton.pad(5);
+		playButton.addListener(new InputListener(){
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				level.resume();
 				return true;
 			}
 		});
 		
-		menuButton = new TextButton("Main Menu", skin);
-		menuButton.pad(5);
-		menuButton.addListener(new InputListener() {
+		backButton = new TextButton("Back", skin);
+		backButton.pad(5);
+		backButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 				game.setScreen(new MainMenu(game));
 				return true;
 			}
+			@Override
+			public void enter(InputEvent event, float x, float y, int pointer,
+					Actor fromActor) {
+				Tween.from(backButton, ActorAccessor.X, .75f).target(backButton.getX() - 10).start(tween);
+				return;
+			}
 		});
 		
 		//The Labels
-		heading = new Label("PAUSED", skin);
+		heading = new Label("Select Level", skin);
 		heading.setFontScale(2f);
 		
-		table.add(heading);
-		table.getCell(heading).padBottom(10);
-		table.row();
-		table.add(resumeButton).padBottom(10);
-		table.row();
-		table.add(menuButton);
+		list = new List(new String[] {"Level 1", "Level 2", "Level 3"}, skin);
+		list.addListener(new EventListener() {
+			
+			@Override
+			public boolean handle(Event event) {
+				switch(list.getSelectedIndex()){
+				case 0:
+					break;
+				}
+				return false;
+			}
+		});
+		scrollPane = new ScrollPane(list, skin);
+		
+		table.add().width(table.getWidth() / 3);
+		table.add(heading).width(table.getWidth() / 3);
+		table.add().width(table.getWidth() / 3).row();
+		table.add(scrollPane).left().padLeft(5).expandY();
+		table.add(playButton);
+		table.add(backButton).bottom().right();
 		table.debug();
 		
 		stage.addActor(table);
@@ -70,7 +93,7 @@ public class PauseScreen extends BaseScreen
 		
 		//The Heading fade in
 		Timeline.createSequence().beginSequence()
-		.push(Tween.from(heading, ActorAccessor.RGB, .75f).target(1, 0, 0))
+		.push(Tween.from(heading, ActorAccessor.RGB, .75f).target(1, 0, 1))
 		.end().repeat(Tween.INFINITY, 0).start(tween);
 	}
 	

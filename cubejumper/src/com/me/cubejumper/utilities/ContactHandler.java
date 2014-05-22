@@ -13,6 +13,7 @@ import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.levels.Level1;
 import com.me.cubejumper.levels.PlayScreen;
 import com.me.cubejumper.screens.DeathScreen;
+import com.me.cubejumper.screens.WinScreen;
 
 /**
  * Handles all contacts in the world.
@@ -55,6 +56,9 @@ public class ContactHandler implements ContactListener
 				|| (returnData(a, 6) && returnData(b, 1))){
 			BaseLevel.isSuperJump = true;
 			Level1.setLightColor(Color.ORANGE);
+		}else if((returnData(a, 1) && returnData(b, 7))
+				|| (returnData(a, 7) && returnData(b, 1))){
+			game.setScreen(new WinScreen(game));
 		}
 	}
 	

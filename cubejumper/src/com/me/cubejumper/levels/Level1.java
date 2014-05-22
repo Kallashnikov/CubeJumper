@@ -69,8 +69,9 @@ public class Level1 extends BaseLevel
 		genCubes(14, 350, 21.5f, 12);
 		
 		genSpikes(15, 340, 31.5f, 14);
+		genSpikes(26, 230, 1.5f, 15);
 		
-		flag = new FinishFlag(world, 500, 1.5f);
+		flag = new FinishFlag(world, 550, 1.5f);
 	}
 	
 	public void render(float delta) {

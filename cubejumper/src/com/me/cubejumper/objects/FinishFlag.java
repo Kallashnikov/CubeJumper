@@ -13,7 +13,7 @@ public class FinishFlag extends BaseObject
 		
 		//Rectangle
 		//shape.setAsBox(5, 5);
-		poly.set(new Vector2[]{new Vector2(0,0), new Vector2(0, 25), new Vector2(2, 0), new Vector2(2, 25), new Vector2(7, 22.5f), new Vector2(2, 20)});
+		poly.set(new Vector2[]{new Vector2(0,0), new Vector2(0, 25), new Vector2(2, 0), new Vector2(7, 22.5f), new Vector2(2, 25)});
 				
 		//Fixture definition
 		fixDef.density = 1f;

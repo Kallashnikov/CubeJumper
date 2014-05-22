@@ -50,7 +50,7 @@ public class MainMenu extends BaseScreen
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				Gdx.app.exit();
+				game.setScreen(new SettingsScreen(game));
 				return true;
 			}
 		});
@@ -62,7 +62,7 @@ public class MainMenu extends BaseScreen
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				Gdx.app.exit();
+				game.setScreen(new LevelScreen(game));
 				return true;
 			}
 		});
