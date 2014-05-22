@@ -17,7 +17,7 @@ public class CubeJumper extends Game
 	CubeJumper game;
 	
 	public final static String TITLE = "Cube Jumper";
-	public final static String VERSION = "v1.5a";
+	public final static String VERSION = "v1.6a";
 	
 	@Override
 	public void create() {
