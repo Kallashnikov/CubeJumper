@@ -307,6 +307,9 @@ public class BaseLevel implements Screen {
 		for(int x = 0; x < 100; x++) {
 			spikeArray[x].dispose();
 		}
+		for(int x = 0; x < 100; x++) {
+			cubeArray[x].dispose();
+		}
 	}
 
 }
