@@ -5,10 +5,10 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/cubejumper"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry exported="true" kind="lib" path="//Fileserv/Student_Home/APD/jtbrown3/Desktop/Java/lib/cubejumper/libs/gdx.jar" sourcepath="/cubejumper/libs/gdx-sources.jar"/>
-	<classpathentry kind="lib" path="//Fileserv/Student_Home/APD/jtbrown3/Desktop/Java/lib/cubejumper-android/libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="//Fileserv/Student_Home/APD/jtbrown3/Desktop/Java/lib/cubejumper/libs/bodyeditor-loader.jar" sourcepath="/cubejumper/libs/bodyeditor-loader-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="//Fileserv/Student_Home/APD/jtbrown3/Desktop/Java/lib/cubejumper/libs/tween-engine-api.jar" sourcepath="/cubejumper/libs/tween-engine-api-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/cubejumper/libs/gdx.jar" sourcepath="/cubejumper/libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/cubejumper/libs/bodyeditor-loader.jar" sourcepath="/cubejumper/libs/bodyeditor-loader-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/cubejumper/libs/tween-engine-api.jar" sourcepath="/cubejumper/libs/tween-engine-api-sources.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
