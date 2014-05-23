@@ -14,6 +14,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -117,12 +118,12 @@ public class BaseLevel implements Screen {
 		BasePowerUp.count = 0;
 		
 		batch = new SpriteBatch();
-		background = new Texture(Gdx.files.internal("ui/background.png"));
-		bg = new Sprite(background);
+		//background = new Texture(Gdx.files.internal("ui/background.png"));
+		//bg = new Sprite(background);
 		atlas = new TextureAtlas("ui/pausebutton.pack");
 		
-		currentBgx = 800;
-		lastTimeBg = TimeUtils.nanoTime();
+		//currentBgx = 800;
+		//lastTimeBg = TimeUtils.nanoTime();
 		
 		stage = new Stage();
 		skin = new Skin();
@@ -188,7 +189,7 @@ public class BaseLevel implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	
+		
 		if(TimeUtils.nanoTime() - lastTimeBg > 100000000){
 			// move the separator 50px
 			currentBgx -= 50;
