@@ -9,7 +9,7 @@ public class FinishFlag extends BaseObject
 	public FinishFlag(World world, float x, float y) {
 		this.world = world;
 		
-		initPoly(x, y);
+		initPoly(x * 2, y);
 		
 		//Rectangle
 		//shape.setAsBox(5, 5);
