@@ -11,7 +11,7 @@ import box2dLight.ConeLight;
 import box2dLight.RayHandler;
 
 /**
- * Level 1 - starter level, extremely easy.
+ * Level 1 - starter level, slighty difficult.
  * 
  * @author Jacob
  */
@@ -19,8 +19,6 @@ public class Level1 extends BaseLevel
 {
 	private PUSloMo sloMo;
 	private PUSuperJump spJump;
-	private FinishFlag flag;
-	
 	private RayHandler handler;
 	private static ConeLight light;
 	
@@ -71,7 +69,7 @@ public class Level1 extends BaseLevel
 		genSpikes(16, 350, 21.5f, 15);
 		genSpikes(26, 230, 1.5f, 15);
 		
-		flag = new FinishFlag(world, 350, 1.5f);
+		new FinishFlag(world, 350, 1.5f);
 	}
 	
 	public void render(float delta) {

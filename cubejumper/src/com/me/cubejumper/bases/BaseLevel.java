@@ -1,12 +1,5 @@
 package com.me.cubejumper.bases;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -14,7 +7,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ImmediateModeRenderer20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -36,7 +28,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
 import com.me.cubejumper.objects.Cubes;
@@ -65,8 +56,8 @@ public class BaseLevel implements Screen {
 	protected static final int POSITIONIT = 3;
 	private static final int TEN = 10;
 	
-	private float currentBgx;
-	private long lastTimeBg;
+//	private float currentBgx;
+//	private long lastTimeBg;
 	
 	public int width, height;
 	public static float startTime, endTime;
@@ -190,24 +181,24 @@ public class BaseLevel implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		if(TimeUtils.nanoTime() - lastTimeBg > 100000000){
-			// move the separator 50px
-			currentBgx -= 50;
-			// set the current time to lastTimeBg
-			lastTimeBg = TimeUtils.nanoTime();
-		}
+//		if(TimeUtils.nanoTime() - lastTimeBg > 100000000){
+//			// move the separator 50px
+//			currentBgx -= 50;
+//			// set the current time to lastTimeBg
+//			lastTimeBg = TimeUtils.nanoTime();
+//		}
 
-		// if the seprator reaches the screen edge, move it back to the first position
-		if(currentBgx == 0){
-			currentBgx = 800;
-		}
+//		// if the seprator reaches the screen edge, move it back to the first position
+//		if(currentBgx == 0){
+//			currentBgx = 800;
+//		}
 		//Table.drawDebug(stage);
 		stage.act(delta);
 		
 		batch.begin();
 		stage.draw();
-		batch.draw(bg, currentBgx - 800, 0);
-		batch.draw(bg, currentBgx, 0);
+	//	batch.draw(bg, currentBgx - 800, 0);
+	//	batch.draw(bg, currentBgx, 0);
 		batch.end();
 		
 		player.update(camera, delta);

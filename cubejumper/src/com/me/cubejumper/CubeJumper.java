@@ -1,6 +1,7 @@
 package com.me.cubejumper;
 
 import com.badlogic.gdx.Game;
+import com.me.cubejumper.levels.*;
 import com.me.cubejumper.screens.MainMenu;
 
 /**
@@ -17,6 +18,9 @@ public class CubeJumper extends Game
 	
 	public final static String TITLE = "Cube Jumper";
 	public final static String VERSION = "v1.6a";
+	
+	public static int currentLevel;
+	public static Object[] levels = {Level1.class, PlayScreen.class};
 	
 	@Override
 	public void create() {

@@ -3,8 +3,6 @@ package com.me.cubejumper.screens;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -34,7 +32,7 @@ public class PauseScreen extends BaseScreen
 		resumeButton.addListener(new InputListener(){
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				level.resume();
+				CubeJumper.levels[CubeJumper.currentLevel] = new Level1(game);
 				return true;
 			}
 		});

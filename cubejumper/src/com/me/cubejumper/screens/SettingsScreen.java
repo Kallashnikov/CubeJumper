@@ -1,11 +1,8 @@
 package com.me.cubejumper.screens;
 
-import java.util.Objects;
-
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -14,9 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.bases.BaseScreen;
 import com.me.cubejumper.utilities.ActorAccessor;
@@ -25,7 +20,6 @@ public class SettingsScreen extends BaseScreen
 {
 	private TextButton playButton, backButton;
 	private List list;
-	private ScrollPane scrollPane;
 	private CheckBox vSync;
 	private Slider slide;
 	
@@ -76,7 +70,7 @@ public class SettingsScreen extends BaseScreen
 		heading.setFontScale(2f);
 		
 		list = new List(new Object[] {vSync, slide}, skin);
-		scrollPane = new ScrollPane(list, skin);
+		new ScrollPane(list, skin);
 		
 		table.add().width(table.getWidth() / 3);
 		table.add(heading).width(table.getWidth() / 3);

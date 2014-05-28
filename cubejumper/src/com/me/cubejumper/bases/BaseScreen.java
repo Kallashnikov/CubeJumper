@@ -63,8 +63,6 @@ public class BaseScreen implements Screen
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		Table.drawDebug(stage);
-		
 		tween.update(delta);
 		
 		stage.act(delta);

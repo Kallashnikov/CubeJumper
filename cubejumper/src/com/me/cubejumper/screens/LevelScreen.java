@@ -3,10 +3,7 @@ package com.me.cubejumper.screens;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -23,7 +20,6 @@ public class LevelScreen extends BaseScreen
 	private TextButton playButton, backButton;
 	private List list;
 	private ScrollPane scrollPane;
-	private Object levelSelected;
 	
 	public LevelScreen(CubeJumper game){
 		this.game = game;
@@ -39,6 +35,7 @@ public class LevelScreen extends BaseScreen
 					int pointer, int button) {
 				switch(list.getSelectedIndex()) {
 				case 0:
+					CubeJumper.currentLevel = 0;
 					game.setScreen(new Level1(game));
 					break;
 				case 1:
