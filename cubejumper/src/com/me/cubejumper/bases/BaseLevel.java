@@ -260,12 +260,14 @@ public class BaseLevel implements Screen {
 	 */
 	public void genCubesUP(int times, int x, float offset, int pos){
 		for(int y = 0 + pos; y < times; y++){
-			cubeArray[x] = new Cubes(world, x, (y * TEN) + offset);
+			cubeArray[y] = new Cubes(world, x, (y * TEN) + offset);
 		}
 	}
 
 	@Override
 	public void resize(int width, int height) {
+//		camera.viewportHeight = height;
+//		camera.viewportWidth = width;
 	}
 
 	@Override

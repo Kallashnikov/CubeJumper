@@ -34,42 +34,25 @@ public class Level2 extends BaseLevel
 
 	public void show() {
 		super.show();
-
+		
 		handler = new RayHandler(world);
-
-		sloMo = new PUSloMo(world, 75, 37.5f);
-		spJump = new PUSuperJump(world, 25, 10);
-
+		
 		light = new ConeLight(handler, 500, Color.WHITE, 500, 0, 0, 270, 60);
 		light.setSoft(true);
 		light.setSoftnessLength(100f);
-
-		genCubesUP(10, 50, 50, 0);
-
-		flag = new FinishFlag(world, 25, 1.5f);
+	
+		genCubesUP(10, 50, 1.5f, 0);
+		
+		flag = new FinishFlag(world, 50, 1.5f);
 	}
 
 	public void render(float delta) {
 		super.render(delta);
-
-		if(isSlowMotion) {
-			sloMo.activate(delta);
-		}else
-			world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
-
-		if(isSuperJump) {
-			spJump.activate(delta);
-		}else{
-			Player.superJump = 1;
-			Player.yLimit = 55;
-			PUSuperJump.count = 0;
-		}
-
+		
+		world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
+		
 		light.setPosition(player.getPosition().x, ((int)player.getPosition().y) + 50);
-
-		sloMo.color(75, 37.5f, Color.BLUE, camera);
-		spJump.color(25, 10, Color.ORANGE, camera);
-
+		
 		handler.updateAndRender();
 		handler.setCombinedMatrix(camera.combined);
 		handler.setAmbientLight(.1f);

@@ -8,7 +8,7 @@ import com.me.cubejumper.screens.MainMenu;
  * Main game class, creates the MainMenu and starts the game.<p>
  * 
  * @param TITLE - "Cube Jumper"
- * @param VERSION - "v1.6a" <p>
+ * @param VERSION - "v1.0.0b" <p>
  * 
  * @author Jacob
  */
@@ -17,7 +17,7 @@ public class CubeJumper extends Game
 	CubeJumper game;
 	
 	public final static String TITLE = "Cube Jumper";
-	public final static String VERSION = "v1.6a";
+	public final static String VERSION = "v1.0.0b";
 	
 	public static int currentLevel;
 	public static Object[] levels = {Level1.class, PlayScreen.class};

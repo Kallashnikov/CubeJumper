@@ -39,8 +39,8 @@ public class LevelScreen extends BaseScreen
 					game.setScreen(new Level1(game));
 					break;
 				case 1:
-					game.setScreen(new PlayScreen(game));
-					break;
+					CubeJumper.currentLevel = 1;
+					game.setScreen(new Level2(game));
 				}
 				return true;
 			}
@@ -58,7 +58,7 @@ public class LevelScreen extends BaseScreen
 			@Override
 			public void enter(InputEvent event, float x, float y, int pointer,
 					Actor fromActor) {
-				Tween.from(backButton, ActorAccessor.X, .75f).target(backButton.getX() - 10).start(tween);
+				//Tween.from(backButton, ActorAccessor.X, .75f).target(backButton.getX() - 10).start(tween);
 				return;
 			}
 		});

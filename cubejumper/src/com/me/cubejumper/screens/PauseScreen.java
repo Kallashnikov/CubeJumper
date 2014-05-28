@@ -10,12 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.bases.BaseScreen;
 import com.me.cubejumper.levels.Level1;
+import com.me.cubejumper.levels.Level2;
 import com.me.cubejumper.utilities.ActorAccessor;
 
 public class PauseScreen extends BaseScreen
 {
-	private Level1 level;
-	
 	private TextButton resumeButton, menuButton;
 	
 	public PauseScreen(CubeJumper game){
@@ -25,14 +24,20 @@ public class PauseScreen extends BaseScreen
 	public void show(){
 		super.show();
 		
-		level = new Level1(game);
-		
 		resumeButton = new TextButton("Resume game", skin);
 		resumeButton.pad(5);
 		resumeButton.addListener(new InputListener(){
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				CubeJumper.levels[CubeJumper.currentLevel] = new Level1(game);
+				switch(CubeJumper.currentLevel) {
+				case 0:
+					new Level1(game).resume();
+					break;
+				case 1:
+					new Level2(game).resume();
+					break;
+				}
+				//CubeJumper.levels[CubeJumper.currentLevel] = new Level1(game);
 				return true;
 			}
 		});
