@@ -58,7 +58,7 @@ public class BaseLevel implements Screen {
 	
 //	private float currentBgx;
 //	private long lastTimeBg;
-	
+
 	public int width, height;
 	public static float startTime, endTime;
 	public static float highScore = 0;
@@ -197,6 +197,7 @@ public class BaseLevel implements Screen {
 		
 		batch.begin();
 		stage.draw();
+
 	//	batch.draw(bg, currentBgx - 800, 0);
 	//	batch.draw(bg, currentBgx, 0);
 		batch.end();
@@ -209,13 +210,13 @@ public class BaseLevel implements Screen {
 	
 	/**
 	 * @param times - number of times the loop will run
-	 * @param offset - start position in the world
+	 * @param offset - starting x position in the world
 	 * @param y - height position
 	 * @param pos - position in the array to start the loop <p>
 	 * 
 	 * @author Jacob
 	 */
-	public void genSpikes(int times, int offset, float y, int pos){
+	public void genSpikesSW(int times, int offset, float y, int pos){
 		for(int x = 0 + pos; x < times; x++){
 			spikeArray[x] = new Spikes(world, (x * TEN) + offset, y);
 		}
@@ -223,15 +224,43 @@ public class BaseLevel implements Screen {
 	
 	/**
 	 * @param times - number of times the loop will run
-	 * @param offset - start position in the world
+	 * @param x - x position
+	 * @param offset - starting y position in the world
+	 * @param pos - position in the array to start the loop <p>
+	 * 
+	 * @author Jacob
+	 */
+	public void genSpikesUP(int times, int x, float offset, int pos){
+		for(int y = 0 + pos; y < times; y++){
+			spikeArray[x] = new Spikes(world, x, (y * TEN) + offset);
+		}
+	}
+	
+	/**
+	 * @param times - number of times the loop will run
+	 * @param offset - starting x position in the world
 	 * @param y - height position
 	 * @param pos - position in the array to start the loop <p>
 	 * 
 	 * @author Jacob
 	 */
-	public void genCubes(int times, int offset, float y, int pos){
+	public void genCubesSW(int times, int offset, float y, int pos){
 		for(int x = 0 + pos; x < times; x++){
 			cubeArray[x] = new Cubes(world, (x * TEN) + offset, y);
+		}
+	}
+	
+	/**
+	 * @param times - number of times the loop will run
+	 * @param x - x position
+	 * @param offset - starting y position in the world
+	 * @param pos - position in the array to start the loop <p>
+	 * 
+	 * @author Jacob
+	 */
+	public void genCubesUP(int times, int x, float offset, int pos){
+		for(int y = 0 + pos; y < times; y++){
+			cubeArray[x] = new Cubes(world, x, (y * TEN) + offset);
 		}
 	}
 
