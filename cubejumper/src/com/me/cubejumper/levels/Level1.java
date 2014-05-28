@@ -44,32 +44,32 @@ public class Level1 extends BaseLevel
 		light.setSoft(true);
 		light.setSoftnessLength(100f);
 		
-		genCubes(2, 50, 1.5f, 0);
-		genCubes(3, 50, 11.5f, 2);
+		genCubesSW(2, 50, 1.5f, 0);
+		genCubesSW(3, 50, 11.5f, 2);
 		
-		genSpikes(4, 100, 1.5f, 0);
-		genSpikes(6, 130, 1.5f, 4);
+		genSpikesSW(4, 100, 1.5f, 0);
+		genSpikesSW(6, 130, 1.5f, 4);
 		
-		genCubes(4, 180, 11.7f, 3);
+		genCubesSW(4, 180, 11.7f, 3);
 		
-		genSpikes(9, 160, 21.7f, 6);
+		genSpikesSW(9, 160, 21.7f, 6);
 		
-		genCubes(5, 250, 1.5f, 4);
+		genCubesSW(5, 250, 1.5f, 4);
 		
-		genSpikes(12, 210, 1.5f, 9);
+		genSpikesSW(12, 210, 1.5f, 9);
 		
-		genCubes(10, 280, 11.5f, 5);
+		genCubesSW(10, 280, 11.5f, 5);
 		
-		genSpikes(13, 250, 21.5f, 12);
+		genSpikesSW(13, 250, 21.5f, 12);
 		
-		genCubes(12, 310, 21.5f, 10);
+		genCubesSW(12, 310, 21.5f, 10);
 		
-		genSpikes(14, 290, 31.5f, 13);
+		genSpikesSW(14, 290, 31.5f, 13);
 		
-		genCubes(15, 360, 11.5f, 12);
+		genCubesSW(15, 360, 11.5f, 12);
 		
-		genSpikes(16, 350, 21.5f, 15);
-		genSpikes(26, 230, 1.5f, 15);
+		genSpikesSW(16, 350, 21.5f, 15);
+		genSpikesSW(26, 230, 1.5f, 15);
 		
 		flag = new FinishFlag(world, 350, 1.5f);
 	}
