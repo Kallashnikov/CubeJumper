@@ -7,8 +7,20 @@ import com.me.cubejumper.Player;
 import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.bases.BasePowerUp;
 
+/**
+ * The super jump power up, which just about doubles the jump height.
+ * @param world
+ * @param x - world x position
+ * @param y - world y position
+ * 
+ * @author Jacob
+ */
 public class PUSuperJump extends BasePowerUp
 {
+	public PUSuperJump(World world){
+		this.world = world;
+	}
+	
 	/**
 	 * The super jump power up, which just about doubles the jump height.
 	 * @param world
@@ -17,10 +29,6 @@ public class PUSuperJump extends BasePowerUp
 	 * 
 	 * @author Jacob
 	 */
-	public PUSuperJump(World world){
-		this.world = world;
-	}
-	
 	public PUSuperJump(World world, float x, float y) {
 		this.world = world;
 		

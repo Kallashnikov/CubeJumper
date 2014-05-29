@@ -1,0 +1,97 @@
+
+menuatlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+slidebar
+  rotate: false
+  xy: 1, 120
+  size: 500, 3
+  split: 0, 0, 0, 3
+  orig: 500, 3
+  offset: 0, 0
+  index: -1
+slidebar_disabled
+  rotate: false
+  xy: 1, 115
+  size: 500, 3
+  split: 0, 0, 0, 3
+  orig: 500, 3
+  offset: 0, 0
+  index: -1
+bluebutton
+  rotate: false
+  xy: 1, 38
+  size: 300, 75
+  split: 58, 8, 37, 8
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+bluebutton_highlighted
+  rotate: false
+  xy: 503, 48
+  size: 300, 75
+  split: 58, 9, 38, 9
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+checkedbox_off
+  rotate: false
+  xy: 1, 4
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+checkedbox_on
+  rotate: false
+  xy: 805, 91
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+knob_disabled
+  rotate: false
+  xy: 303, 81
+  size: 32, 32
+  split: 14, 15, 0, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+knob_enabled
+  rotate: false
+  xy: 35, 4
+  size: 32, 32
+  split: 14, 14, 0, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+button_down
+  rotate: false
+  xy: 805, 81
+  size: 8, 8
+  split: 2, 2, 2, 2
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+button_up
+  rotate: false
+  xy: 839, 115
+  size: 8, 8
+  split: 1, 2, 1, 2
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+default_selection
+  rotate: false
+  xy: 1, 1
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+default_transparent
+  rotate: false
+  xy: 303, 78
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1

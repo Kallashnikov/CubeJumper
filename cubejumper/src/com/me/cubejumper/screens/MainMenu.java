@@ -25,7 +25,7 @@ public class MainMenu extends BaseScreen
 	public MainMenu(CubeJumper game) {
 		this.game = game;
 	}
-
+	
 	@Override
 	public void show() {
 		super.show();
@@ -160,20 +160,19 @@ public class MainMenu extends BaseScreen
 	public void hide() {
 		super.hide();
 	}
-
+	
 	@Override
 	public void pause() {
 		super.pause();
 	}
-
+	
 	@Override
 	public void resume() {
 		super.pause();
 	}
-
+	
 	@Override
 	public void dispose() {
 		super.dispose();
 	}
-
 }

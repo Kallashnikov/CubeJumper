@@ -71,7 +71,7 @@ public class BaseScreen implements Screen
 			stage.draw();
 		batch.end();
 	}
-
+	
 	@Override
 	public void resize(int width, int height) {
 		stage.setViewport(width, height, true);
@@ -79,19 +79,19 @@ public class BaseScreen implements Screen
 		table.invalidateHierarchy();
 		table.setSize(width, height);
 	}
-
+	
 	@Override
 	public void hide() {
 	}
-
+	
 	@Override
 	public void pause() {
 	}
-
+	
 	@Override
 	public void resume() {
 	}
-
+	
 	@Override
 	public void dispose() {
 		batch.dispose();
@@ -99,5 +99,4 @@ public class BaseScreen implements Screen
 		atlas.dispose();
 		skin.dispose();
 	}
-
 }

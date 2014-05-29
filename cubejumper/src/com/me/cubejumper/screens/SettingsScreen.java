@@ -3,6 +3,7 @@ package com.me.cubejumper.screens;
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -64,6 +65,19 @@ public class SettingsScreen extends BaseScreen
 		
 		slide = new Slider(25, 1000, 5, false, skin);
 		vSync = new CheckBox("vSync", skin);
+		vSync.setChecked(true);
+		vSync.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				if(vSync.isChecked()) {
+					Gdx.graphics.setVSync(true);
+				}else{
+					Gdx.graphics.setVSync(false);
+				}
+				return true;
+			}
+		});
 		
 		//The Labels
 		heading = new Label("Settings", skin);

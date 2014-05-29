@@ -44,9 +44,12 @@ import com.me.cubejumper.utilities.InputHandler;
  * @param ContactHandler conHandler
  * @param World world
  * @param OrthographicCamera camera<p>
+ * @param TIMESTEP (float) - (1 / 60f)
+ * @param VELOCITYIT (int) - 8
+ * @param POSITIONIT (int) - 3
  * @param startTime - beginning of the highscore count
  * @param endTime - end of the highscore count
- * @param highScore - takes endTime - startTime<p>
+ * @param highScore - takes (endTime - startTime)<p>
  * 
  * @author Jacob
  */

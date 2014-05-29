@@ -50,6 +50,14 @@ public class BaseObject
 		fixDef.shape = poly;
 	}
 	
+	/**
+	 * X, y are in increments of 10
+	 * 
+	 * @param x - world x position
+	 * @param y - world y position<p>
+	 * 
+	 * @author Jacob
+	 */
 	protected void initCircle(float x, float y) {
 		bodyDef = new BodyDef();
 		bodyDef.position.set(x, y);

@@ -26,12 +26,12 @@ public class PlayScreen extends BaseLevel
 	public void render(float delta) {
 		super.render(delta);
 	}
-
+	
 	@Override
 	public void resize(int width, int height) {
 		super.resize(width, height);
 	}
-
+	
 	@Override
 	public void show() {
 		super.show();
@@ -65,22 +65,22 @@ public class PlayScreen extends BaseLevel
 	public World getWorld(){ 
 		return world;
 	}
-
+	
 	@Override
 	public void hide() {
 		super.hide();
 	}
-
+	
 	@Override
 	public void pause() {
 		super.pause();
 	}
-
+	
 	@Override
 	public void resume() {
 		super.resume();
 	}
-
+	
 	@Override
 	public void dispose() {
 		super.dispose();
@@ -89,5 +89,4 @@ public class PlayScreen extends BaseLevel
 			spikeArray[x].dispose();
 		}
 	}
-
 }

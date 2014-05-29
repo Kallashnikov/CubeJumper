@@ -2,6 +2,12 @@ package com.me.cubejumper.bases;
 
 import com.me.cubejumper.CubeJumper;
 
+/**
+ * Basis for levels with PowerUps, it contains:
+ * <p>
+ * 
+ * @author Jacob
+ */
 public class BaseLevelPU extends BaseLevel
 {
 	public BaseLevelPU(CubeJumper game) {

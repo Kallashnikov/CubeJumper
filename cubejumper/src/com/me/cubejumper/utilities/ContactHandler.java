@@ -65,15 +65,15 @@ public class ContactHandler implements ContactListener
 	public Boolean returnData(Fixture fix, int num) {
 		return fix.getBody().getUserData().equals(num);
 	}
-
+	
 	@Override
 	public void endContact(Contact contact) {
 	}
-
+	
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 	}
-
+	
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
 	}

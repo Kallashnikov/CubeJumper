@@ -10,6 +10,8 @@ public class Main {
 		cfg.useGL20 = true;
 		cfg.width = 1080;
 		cfg.height = 720;
+		cfg.backgroundFPS = -1;
+		cfg.foregroundFPS = 60;
 		
 		new LwjglApplication(new CubeJumper(), cfg);
 	}

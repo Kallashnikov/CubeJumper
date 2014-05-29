@@ -17,21 +17,17 @@ import box2dLight.RayHandler;
  */
 public class Level2 extends BaseLevel
 {
-	private PUSloMo sloMo;
-	private PUSuperJump spJump;
-	private FinishFlag flag;
-
 	private RayHandler handler;
 	private static ConeLight light;
-
+	
 	public Level2(CubeJumper game) {
 		BaseLevel.game = game;
 	}
-
+	
 	public Level2(CubeJumper game, int x) {
 		super.show();
 	}
-
+	
 	public void show() {
 		super.show();
 		
@@ -43,9 +39,9 @@ public class Level2 extends BaseLevel
 	
 		genCubesUP(10, 50, 1.5f, 0);
 		
-		flag = new FinishFlag(world, 50, 1.5f);
+		new FinishFlag(world, 50, 1.5f);
 	}
-
+	
 	public void render(float delta) {
 		super.render(delta);
 		
@@ -57,34 +53,34 @@ public class Level2 extends BaseLevel
 		handler.setCombinedMatrix(camera.combined);
 		handler.setAmbientLight(.1f);
 	}
-
+	
 	public static Color getLightColor() {
 		return	light.getColor();
 	}
-
+	
 	public static void setLightColor(Color color) {
 		light.setColor(color);
 	}
-
+	
 	public void resize(int width, int height) {
 		super.resize(width, height);
 	}
-
+	
 	public void hide() {
 		super.hide();
 	}
-
+	
 	public void pause() {
 		super.pause();
 	}
-
+	
 	public void resume() {
 		super.resume();
 	}
-
+	
 	public void dispose() {
 		super.dispose();
-
+		
 		handler.dispose();
 	}
 }

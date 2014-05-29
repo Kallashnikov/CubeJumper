@@ -40,7 +40,7 @@ public class ActorAccessor implements TweenAccessor<Actor>
 			return -1;
 		}
 	}
-
+	
 	@Override
 	public void setValues(Actor target, int tweenType, float[] newValues) {
 		switch(tweenType) {
@@ -59,5 +59,4 @@ public class ActorAccessor implements TweenAccessor<Actor>
 			assert false;
 		}
 	}
-
 }

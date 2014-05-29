@@ -20,6 +20,7 @@ import com.badlogic.gdx.physics.box2d.World;
  * @param xLimit (int) - limits x velocity, 60
  * @param yLimit (int) - limits y velocity, 55
  * @param angVel (float) - limits angular velocity, 5.89f
+ * @param superJump (int) - changes when to 2 when Player has SuperJump, 1
  * @param available (boolean) - checks if there is an Accelerometer
  * @param currX (float)
  * @param currY	(float)

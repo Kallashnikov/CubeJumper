@@ -5,6 +5,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
+/**
+ * Powerup object base class.
+ * 
+ * @author Jacob
+ */
 public class BasePowerUp extends BaseObject
 {
 	public static float WAIT_TIME = 5f;
