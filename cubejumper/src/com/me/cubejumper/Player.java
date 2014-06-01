@@ -155,21 +155,11 @@ public class Player
 		return flo;
 	}
 
-	public static String isCanJump() {
-		String num;
-		if(canJump){
-			num = "true";
-		}else{
-			num = "false";
-		}
-		return num;
+	public static boolean isCanJump() {
+		return canJump;
 	}
 
-	public static void setCanJump(String canJump) {
-		if(canJump.equals("true")){
-			Player.canJump = true;
-		}else{
-			Player.canJump = false;
-		}
+	public static void setCanJump(boolean canJump) {
+		Player.canJump = canJump;
 	}
 }
