@@ -299,24 +299,7 @@ public class BaseLevel implements Screen {
 		
 		FileHandle file1 = Gdx.files.local("savedata/pause.json");
 		file1.writeString(obj.toJSONString(), false);
-
-//		FileHandle file1 = Gdx.files.local("positionx.txt");
-//			file1.writeString(Float.toString(player.getPosition().x), false);
-//		FileHandle file2 = Gdx.files.local("positiony.txt");
-//			file2.writeString(Float.toString(player.getPosition().y), false);
-//		FileHandle file3 = Gdx.files.local("velocityx.txt");
-//			file3.writeString(Float.toString(player.getVelocity().x), false);
-//		FileHandle file4 = Gdx.files.local("velocityy.txt");
-//			file4.writeString(Float.toString(player.getVelocity().y), false);
-//		FileHandle file5 = Gdx.files.local("angvelocity.txt");
-//			file5.writeString(player.getAngVelocity(), false);
-//		FileHandle file6 = Gdx.files.local("canjump.txt");
-//			file6.writeString(Player.isCanJump(), false);
 		
-//		SaveData.playerPos = player.getPosition();
-//		SaveData.playerXYVel = player.getVelocity();
-//		SaveData.playerRot = player.getAngVelocity();
-//		SaveData.pausedCanJump = Player.isCanJump();
 		game.setScreen(new PauseScreen(game));
 	}
 
@@ -329,7 +312,7 @@ public class BaseLevel implements Screen {
 		try {
 			FileHandle file1 = Gdx.files.local("savedata/pause.json");
 			Object obj = parser.parse(new FileReader(file1.toString()));
-	 
+			
 			JSONObject jsonObject = (JSONObject) obj;
 	 
 			float positionx = Float.valueOf(jsonObject.get("positionx").toString());
