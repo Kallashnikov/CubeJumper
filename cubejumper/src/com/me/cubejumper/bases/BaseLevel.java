@@ -2,11 +2,10 @@ package com.me.cubejumper.bases;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -42,8 +41,8 @@ import com.me.cubejumper.objects.Cubes;
 import com.me.cubejumper.objects.Spikes;
 import com.me.cubejumper.screens.PauseScreen;
 import com.me.cubejumper.utilities.ContactHandler;
+import com.me.cubejumper.utilities.FileManager;
 import com.me.cubejumper.utilities.InputHandler;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 /**
  * Basis for all level classes, it contains:
@@ -110,7 +109,7 @@ public class BaseLevel implements Screen {
 	protected BitmapFont white, black;
 	protected Label heading;
 	protected InputMultiplexer multiIn;
-
+	
 	@Override
 	public void show() {
 		width = Gdx.graphics.getWidth() / 5;
@@ -289,6 +288,18 @@ public class BaseLevel implements Screen {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void pause() {
+//		posx = new BigDecimal(player.getPosition().x);
+//			posx = dec.encrypt(posx);
+//		posy = new BigDecimal(player.getPosition().y);
+//			posy = dec.encrypt(posy);
+//		velx = new BigDecimal(player.getPosition().x);
+//			velx = dec.encrypt(velx);
+//		vely = new BigDecimal(player.getPosition().y);
+//			vely = dec.encrypt(vely);
+//		ang = new BigDecimal(player.getAngVelocity());
+//			ang = dec.encrypt(ang);
+//		text.encrypt(Player.isCanJump());
+			
 		JSONObject obj = new JSONObject();
 		obj.put("positionx", player.getPosition().x);
 		obj.put("positiony", player.getPosition().y);
@@ -300,6 +311,10 @@ public class BaseLevel implements Screen {
 		FileHandle file1 = Gdx.files.local("savedata/pause.json");
 		file1.writeString(obj.toJSONString(), false);
 		
+		new FileManager("fuck0bitchs1get$", "savedata/pause.json"
+				, "savedata/encrypted.json", 0);
+		FileManager.deleteFile("savedata/pause.json");
+		
 		game.setScreen(new PauseScreen(game));
 	}
 
@@ -308,56 +323,38 @@ public class BaseLevel implements Screen {
 		game.setScreen(this);
 		
 		JSONParser parser = new JSONParser();
-		 
+		
+		new FileManager("fuck0bitchs1get$", "savedata/encrypted.json"
+				, "savedata/decrypted.json", 1);
+		FileManager.deleteFile("savedata/encrypted.json");
+		
 		try {
-			FileHandle file1 = Gdx.files.local("savedata/pause.json");
+			FileHandle file1 = Gdx.files.local("savedata/decrypted.json");
 			Object obj = parser.parse(new FileReader(file1.toString()));
 			
 			JSONObject jsonObject = (JSONObject) obj;
-	 
+			
 			float positionx = Float.valueOf(jsonObject.get("positionx").toString());
-			float positiony = Float.valueOf(jsonObject.get("positiony").toString());;
+			float positiony = Float.valueOf(jsonObject.get("positiony").toString());
 			float angvel = Float.valueOf(jsonObject.get("angvelocity").toString());
 			Vector2 coords = new Vector2(positionx, positiony);
 			player.setPositionAndAngVelocity(coords, angvel);
 			
 			float velocityx = Float.valueOf(jsonObject.get("velocityx").toString());
 			float velocityy = Float.valueOf(jsonObject.get("velocityy").toString());
-			boolean canjump = (Boolean) jsonObject.get("canjump");
+			String canjump = (String) jsonObject.get("canjump");
 			
 			coords.set(velocityx, velocityy);
 			player.setVelocity(coords);
 			Player.setCanJump(canjump);
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (org.json.simple.parser.ParseException e) {
-			// TODO Auto-generated catch block
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-//		float x, y;
-//		Vector2 vec = new Vector2(0, 0);
-//		
-//		FileHandle file4 = Gdx.files.local("velocityx.txt");
-//		x = Float.parseFloat(file4.readString());
-//		FileHandle file5 = Gdx.files.local("velocityy.txt");
-//		y = Float.parseFloat(file5.readString());
-//		vec.set(x, y);
-//		player.setVelocity(vec);
-//	
-//		FileHandle file6 = Gdx.files.local("canjump.txt");
-//		Player.setCanJump(file6.readString());
-//	
-//		FileHandle file1 = Gdx.files.local("positionx.txt");
-//			x = Float.parseFloat(file1.readString());
-//		FileHandle file2 = Gdx.files.local("positiony.txt");
-//			y = Float.parseFloat(file2.readString());
-//		vec.set(x, y);
-//		FileHandle file3 = Gdx.files.local("angvelocity.txt");
-//			y = Float.parseFloat(file3.readString());
-//		player.setPositionAndAngVelocity(vec, y);
 	}
 
 	@Override
@@ -372,5 +369,4 @@ public class BaseLevel implements Screen {
 			cubeArray[x].dispose();
 		}
 	}
-
 }
