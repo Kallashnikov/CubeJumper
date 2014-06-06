@@ -79,6 +79,8 @@ public class PlayScreen extends BaseLevel
 	@Override
 	public void resume() {
 		super.resume();
+		
+		CubeJumper.currentLevel = 2;
 	}
 	
 	@Override

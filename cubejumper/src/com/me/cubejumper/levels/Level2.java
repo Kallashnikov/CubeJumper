@@ -2,11 +2,8 @@ package com.me.cubejumper.levels;
 
 import com.badlogic.gdx.graphics.Color;
 import com.me.cubejumper.CubeJumper;
-import com.me.cubejumper.Player;
 import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.objects.FinishFlag;
-import com.me.cubejumper.objects.powerups.PUSloMo;
-import com.me.cubejumper.objects.powerups.PUSuperJump;
 import box2dLight.ConeLight;
 import box2dLight.RayHandler;
 
@@ -72,6 +69,8 @@ public class Level2 extends BaseLevel
 	
 	public void pause() {
 		super.pause();
+		
+		CubeJumper.currentLevel = 1;
 	}
 	
 	public void resume() {

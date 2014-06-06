@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
@@ -13,6 +14,8 @@ import javax.crypto.CipherOutputStream;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
+
+import com.sun.crypto.provider.AESKeyGenerator;
 
 public class FileManager
 {
@@ -53,8 +56,7 @@ public class FileManager
 	}
 	
 	public static void encryptOrDecrypt(String key, int mode, InputStream is, OutputStream os) throws Throwable {
-
-		DESKeySpec dks = new DESKeySpec(key.getBytes());
+		DESKeySpec dks = new DESKeySpec(key.getBytes(Charset.forName("UTF-8")));
 		SecretKeyFactory skf = SecretKeyFactory.getInstance("DES");
 		SecretKey desKey = skf.generateSecret(dks);
 		Cipher cipher = Cipher.getInstance("DES"); // DES/ECB/PKCS5Padding for SunJCE

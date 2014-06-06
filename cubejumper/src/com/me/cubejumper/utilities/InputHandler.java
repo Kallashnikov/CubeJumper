@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.Player;
 import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.bases.BasePowerUp;
@@ -43,6 +44,8 @@ public class InputHandler implements InputProcessor
 		case Keys.D: 
 			player.movement.x = Player.speed;
 			break;
+		case Keys.BACK:
+			CubeJumper.levelSel();
 		default:
 			break;
 		}

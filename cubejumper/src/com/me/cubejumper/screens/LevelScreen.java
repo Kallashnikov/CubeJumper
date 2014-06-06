@@ -33,15 +33,7 @@ public class LevelScreen extends BaseScreen
 		playButton.addListener(new InputListener(){
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				switch(list.getSelectedIndex()) {
-				case 0:
-					CubeJumper.currentLevel = 0;
-					game.setScreen(new Level1(game));
-					break;
-				case 1:
-					CubeJumper.currentLevel = 1;
-					game.setScreen(new Level2(game));
-				}
+				CubeJumper.levelSel(list);
 				return true;
 			}
 		});

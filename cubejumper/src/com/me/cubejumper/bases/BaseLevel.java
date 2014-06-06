@@ -3,6 +3,7 @@ package com.me.cubejumper.bases;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -14,12 +15,12 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -41,7 +42,6 @@ import com.me.cubejumper.objects.Cubes;
 import com.me.cubejumper.objects.Spikes;
 import com.me.cubejumper.screens.PauseScreen;
 import com.me.cubejumper.utilities.ContactHandler;
-import com.me.cubejumper.utilities.FileManager;
 import com.me.cubejumper.utilities.InputHandler;
 
 /**
@@ -79,6 +79,8 @@ public class BaseLevel implements Screen {
 	public static boolean playing = true;
 	private Spikes[] spikeArray = new Spikes[100];
 	private Cubes[] cubeArray = new Cubes[100];
+	protected int spikePos = 0;
+	protected int cubePos;
 	
 	protected static CubeJumper game;
 	
@@ -109,6 +111,13 @@ public class BaseLevel implements Screen {
 	protected BitmapFont white, black;
 	protected Label heading;
 	protected InputMultiplexer multiIn;
+
+	public BaseLevel(){
+	}
+	
+	public BaseLevel(int n) {
+		resume();
+	}
 	
 	@Override
 	public void show() {
@@ -198,20 +207,6 @@ public class BaseLevel implements Screen {
 //			// set the current time to lastTimeBg
 //			lastTimeBg = TimeUtils.nanoTime();
 //		}
-
-//		// if the seprator reaches the screen edge, move it back to the first position
-//		if(currentBgx == 0){
-//			currentBgx = 800;
-//		}
-		//Table.drawDebug(stage);
-		stage.act(delta);
-		
-		batch.begin();
-		stage.draw();
-
-	//	batch.draw(bg, currentBgx - 800, 0);
-	//	batch.draw(bg, currentBgx, 0);
-		batch.end();
 		
 		player.update(camera, delta);
 		camera.update();
@@ -228,8 +223,8 @@ public class BaseLevel implements Screen {
 	 * @author Jacob
 	 */
 	public void genSpikesSW(int times, int offset, float y, int pos){
-		for(int x = 0 + pos; x < times; x++){
-			spikeArray[x] = new Spikes(world, (x * TEN) + offset, y);
+		for(int x = 0 + pos; x < times; x++, spikePos++){
+			spikeArray[spikePos] = new Spikes(world, (x * TEN) + offset, y);
 		}
 	}
 	
@@ -242,8 +237,8 @@ public class BaseLevel implements Screen {
 	 * @author Jacob
 	 */
 	public void genSpikesUP(int times, int x, float offset, int pos){
-		for(int y = 0 + pos; y < times; y++){
-			spikeArray[x] = new Spikes(world, x, (y * TEN) + offset);
+		for(int y = 0 + pos; y < times; y++, spikePos++){
+			spikeArray[spikePos] = new Spikes(world, x, (y * TEN) + offset);
 		}
 	}
 	
@@ -256,8 +251,8 @@ public class BaseLevel implements Screen {
 	 * @author Jacob
 	 */
 	public void genCubesSW(int times, int offset, float y, int pos){
-		for(int x = 0 + pos; x < times; x++){
-			cubeArray[x] = new Cubes(world, (x * TEN) + offset, y);
+		for(int x = 0 + pos; x < times; x++, cubePos++){
+			cubeArray[cubePos] = new Cubes(world, (x * TEN) + offset, y);
 		}
 	}
 	
@@ -270,8 +265,8 @@ public class BaseLevel implements Screen {
 	 * @author Jacob
 	 */
 	public void genCubesUP(int times, int x, float offset, int pos){
-		for(int y = 0 + pos; y < times; y++){
-			cubeArray[y] = new Cubes(world, x, (y * TEN) + offset);
+		for(int y = 0 + pos; y < times; y++, cubePos++){
+			cubeArray[cubePos] = new Cubes(world, x, (y * TEN) + offset);
 		}
 	}
 
@@ -311,9 +306,9 @@ public class BaseLevel implements Screen {
 		FileHandle file1 = Gdx.files.local("savedata/pause.json");
 		file1.writeString(obj.toJSONString(), false);
 		
-		new FileManager("fuck0bitchs1get$", "savedata/pause.json"
-				, "savedata/encrypted.json", 0);
-		FileManager.deleteFile("savedata/pause.json");
+//		new FileManager("savedata", "savedata/pause.json"
+//				, "savedata/encrypted.json", 0);
+//		FileManager.deleteFile("savedata/pause.json");
 		
 		game.setScreen(new PauseScreen(game));
 	}
@@ -324,15 +319,17 @@ public class BaseLevel implements Screen {
 		
 		JSONParser parser = new JSONParser();
 		
-		new FileManager("fuck0bitchs1get$", "savedata/encrypted.json"
-				, "savedata/decrypted.json", 1);
-		FileManager.deleteFile("savedata/encrypted.json");
+//		new FileManager("savedata", "savedata/encrypted.json"
+//				, "savedata/decrypted.json", 1);
+//		FileManager.deleteFile("savedata/encrypted.json");
 		
 		try {
-			FileHandle file1 = Gdx.files.local("savedata/decrypted.json");
+			FileHandle file1 = Gdx.files.local("savedata/pause.json");
 			Object obj = parser.parse(new FileReader(file1.toString()));
 			
 			JSONObject jsonObject = (JSONObject) obj;
+			
+			//file1.delete();
 			
 			float positionx = Float.valueOf(jsonObject.get("positionx").toString());
 			float positiony = Float.valueOf(jsonObject.get("positiony").toString());
@@ -347,7 +344,6 @@ public class BaseLevel implements Screen {
 			coords.set(velocityx, velocityy);
 			player.setVelocity(coords);
 			Player.setCanJump(canjump);
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

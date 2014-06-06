@@ -29,14 +29,15 @@ public class PauseScreen extends BaseScreen
 		resumeButton.addListener(new InputListener(){
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				switch(CubeJumper.currentLevel) {
-				case 0:
-					new Level1(game).resume();
-					break;
-				case 1:
-					new Level2(game).resume();
-					break;
-				}
+//				switch(CubeJumper.currentLevel) {
+//				case 0:
+//					new Level1(game).resume();
+//					break;
+//				case 1:
+//					new Level2(game).resume();
+//					break;
+//				}
+				CubeJumper.levelSel();
 				//CubeJumper.levels[CubeJumper.currentLevel] = new Level1(game);
 				return true;
 			}

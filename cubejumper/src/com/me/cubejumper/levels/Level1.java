@@ -96,6 +96,10 @@ public class Level1 extends BaseLevel
 		handler.updateAndRender();
 		handler.setCombinedMatrix(camera.combined);
 		handler.setAmbientLight(.1f);
+		
+		batch.begin();
+		stage.draw();
+		batch.end();
 	}
 	
 	public static Color getLightColor() {
@@ -116,6 +120,8 @@ public class Level1 extends BaseLevel
 
 	public void pause() {
 		super.pause();
+		
+		CubeJumper.currentLevel = 0;
 	}
 
 	public void resume() {
