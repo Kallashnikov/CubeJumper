@@ -1,9 +1,12 @@
 package com.me.cubejumper.levels;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.me.cubejumper.CubeJumper;
 import com.me.cubejumper.bases.BaseLevel;
 import com.me.cubejumper.objects.FinishFlag;
+
 import box2dLight.ConeLight;
 import box2dLight.RayHandler;
 
@@ -42,13 +45,15 @@ public class Level2 extends BaseLevel
 	public void render(float delta) {
 		super.render(delta);
 		
-		world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
-		
 		light.setPosition(player.getPosition().x, ((int)player.getPosition().y) + 50);
 		
 		handler.updateAndRender();
 		handler.setCombinedMatrix(camera.combined);
 		handler.setAmbientLight(.1f);
+		
+		batch.begin();
+		stage.draw();
+		batch.end();
 	}
 	
 	public static Color getLightColor() {
@@ -70,6 +75,7 @@ public class Level2 extends BaseLevel
 	public void pause() {
 		super.pause();
 		
+		ifPause = true;
 		CubeJumper.currentLevel = 1;
 	}
 	

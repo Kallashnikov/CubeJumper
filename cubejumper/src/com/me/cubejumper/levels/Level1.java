@@ -77,8 +77,7 @@ public class Level1 extends BaseLevel
 		
 		if(isSlowMotion) {
 			sloMo.activate(delta);
-		}else
-			world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
+		}
 		
 		if(isSuperJump) {
 			spJump.activate(delta);

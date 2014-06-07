@@ -77,6 +77,7 @@ public class BaseLevel implements Screen {
 	public static boolean isSlowMotion = false;
 	public static boolean isSuperJump = false;
 	public static boolean playing = true;
+	protected static boolean ifPause = false;
 	private Spikes[] spikeArray = new Spikes[100];
 	private Cubes[] cubeArray = new Cubes[100];
 	protected int spikePos = 0;
@@ -208,6 +209,11 @@ public class BaseLevel implements Screen {
 //			lastTimeBg = TimeUtils.nanoTime();
 //		}
 		
+		if(ifPause)
+			world.step(0, VELOCITYIT, POSITIONIT);
+		else
+			world.step(TIMESTEP, VELOCITYIT, POSITIONIT);
+		
 		player.update(camera, delta);
 		camera.update();
 
@@ -283,17 +289,7 @@ public class BaseLevel implements Screen {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void pause() {
-//		posx = new BigDecimal(player.getPosition().x);
-//			posx = dec.encrypt(posx);
-//		posy = new BigDecimal(player.getPosition().y);
-//			posy = dec.encrypt(posy);
-//		velx = new BigDecimal(player.getPosition().x);
-//			velx = dec.encrypt(velx);
-//		vely = new BigDecimal(player.getPosition().y);
-//			vely = dec.encrypt(vely);
-//		ang = new BigDecimal(player.getAngVelocity());
-//			ang = dec.encrypt(ang);
-//		text.encrypt(Player.isCanJump());
+		ifPause = true;
 			
 		JSONObject obj = new JSONObject();
 		obj.put("positionx", player.getPosition().x);
@@ -310,12 +306,12 @@ public class BaseLevel implements Screen {
 //				, "savedata/encrypted.json", 0);
 //		FileManager.deleteFile("savedata/pause.json");
 		
-		game.setScreen(new PauseScreen(game));
+//		game.setScreen(new PauseScreen(game));
 	}
 
 	@Override
 	public void resume() {
-		game.setScreen(this);
+//		game.setScreen(this);
 		
 		JSONParser parser = new JSONParser();
 		
@@ -351,6 +347,8 @@ public class BaseLevel implements Screen {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		
+		ifPause = false;
 	}
 
 	@Override

@@ -46,6 +46,7 @@ public class InputHandler implements InputProcessor
 			break;
 		case Keys.BACK:
 			CubeJumper.levelSel();
+			break;
 		default:
 			break;
 		}
